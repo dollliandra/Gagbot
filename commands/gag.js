@@ -1,4 +1,19 @@
 const { SlashCommandBuilder } = require('discord.js');
+const fs = require('fs');
+const path = require('path');
+
+// Grab all the command files from the commands directory
+const gagtypes = [];
+const commandsPath = path.join(__dirname, 'gags');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+// Push the gag name over to the choice array. 
+for (const file of commandFiles) {
+    const gag = require(`./gags/${file}`);
+	gagtypes.push(
+        { name: gag.choicename, value: file.replace('.js', '') }
+    );
+}
 
 module.exports = {
 	data: new SlashCommandBuilder()
