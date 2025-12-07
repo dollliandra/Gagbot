@@ -16,7 +16,7 @@ for (const file of commandFiles) {
 }
 
 // Construct and prepare an instance of the REST module
-const rest = new REST({ version: '10' }).setToken(process.env.DISCORDTOKEN);
+const rest = new REST({ version: '10' }).setToken(process.env.DISCORDBOTTOKEN);
 
 (async () => {
     const data = await rest.put(
