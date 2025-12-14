@@ -49,7 +49,7 @@ const garbleText = (text, intensity) => {
 
 
 exports.garbleText = garbleText;
-exports.choicename = "High-Security Ball Gag"
+exports.choicename = "Ball Gag"
 
 
 
@@ -80,19 +80,19 @@ exports.choicename = "High-Security Ball Gag"
 
 
 // Test Gag Intensities
-let intensityTestMsg = "This unit is a good doll, and will wear all possible ball gags for Mistress."
-let intensityTestMsg2 = "The quick brown fox jumped over the lazy dog."
+// let intensityTestMsg = "This unit is a good doll, and will wear all possible ball gags for Mistress."
+// let intensityTestMsg2 = "The quick brown fox jumped over the lazy dog."
 
-console.log(`Original:     ${intensityTestMsg}\n`)
-console.log(`Intensity 1-2:   ${garbleText(intensityTestMsg, 1)}`)
-console.log(`Intensity 3-4:   ${garbleText(intensityTestMsg, 3)}`)
-console.log(`Intensity 5-6:   ${garbleText(intensityTestMsg, 5)}`)
-console.log(`Intensity 7-8:   ${garbleText(intensityTestMsg, 7)}`)
-console.log(`Intensity 9-10:  ${garbleText(intensityTestMsg, 9)}`)
+// console.log(`Original:     ${intensityTestMsg}\n`)
+// console.log(`Intensity 1-2:   ${garbleText(intensityTestMsg, 1)}`)
+// console.log(`Intensity 3-4:   ${garbleText(intensityTestMsg, 3)}`)
+// console.log(`Intensity 5-6:   ${garbleText(intensityTestMsg, 5)}`)
+// console.log(`Intensity 7-8:   ${garbleText(intensityTestMsg, 7)}`)
+// console.log(`Intensity 9-10:  ${garbleText(intensityTestMsg, 9)}`)
 
-console.log(`\nOriginal:     ${intensityTestMsg2}\n`)
-console.log(`Intensity 1-2:   ${garbleText(intensityTestMsg2, 2)}`)
-console.log(`Intensity 3-4:   ${garbleText(intensityTestMsg2, 4)}`)
-console.log(`Intensity 5-6:   ${garbleText(intensityTestMsg2, 6)}`)
-console.log(`Intensity 7-8:   ${garbleText(intensityTestMsg2, 8)}`)
-console.log(`Intensity 9-10:  ${garbleText(intensityTestMsg2, 10)}`)
+// console.log(`\nOriginal:     ${intensityTestMsg2}\n`)
+// console.log(`Intensity 1-2:   ${garbleText(intensityTestMsg2, 2)}`)
+// console.log(`Intensity 3-4:   ${garbleText(intensityTestMsg2, 4)}`)
+// console.log(`Intensity 5-6:   ${garbleText(intensityTestMsg2, 6)}`)
+// console.log(`Intensity 7-8:   ${garbleText(intensityTestMsg2, 8)}`)
+// console.log(`Intensity 9-10:  ${garbleText(intensityTestMsg2, 10)}`)
