@@ -168,6 +168,10 @@ const garbleMessage = async (msg) => {
             outtext = messagetexts.join(" ");
         }
         if (modifiedmessage) {
+            if (msg.type == "19") {
+                const replied = await msg.fetchReference();
+                outtext = `${replied.author.toString()}\n${outtext}`
+            }
             if (outtext.length > 1999) {
                 outtext = outtext.slice(0, 1999); // Seriously, STOP POSTING LONG MESSAGES
             }
