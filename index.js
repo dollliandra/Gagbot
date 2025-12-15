@@ -57,9 +57,17 @@ catch (err) {
 }
 
 // Grab all the command files from the commands directory
-const commands = [];
+const commands = new Map();
+const componentHandlers = new Map();
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+for (const file of commandFiles) {
+    const cmd = require(path.join(commandsPath, file));
+    commands.set(cmd.data.name, cmd);
+    cmd.componentHandlers?.forEach((handler) => {
+        componentHandlers.set(handler.key, handler);
+    });
+}
 
 var gagged = {}
 
@@ -102,9 +110,12 @@ client.on('interactionCreate', async (interaction) => {
             interaction.reply({ content: `Please use these commands over in <#${process.env.CHANNELID}>.`, flags: discord.MessageFlags.Ephemeral })
             return;
         }
-        if (commandFiles.includes(`${interaction.commandName}.js`)) {
-            const cmd = require(path.join(commandsPath, `${interaction.commandName}.js`))
-            cmd.execute(interaction);
+
+        if (interaction.isMessageComponent()) {
+            const [key, ...args] = interaction.customId.split("-");
+            componentHandlers.get(key)?.handle(interaction, ...args);
+        } else {
+            commands.get(interaction.commandName)?.execute(interaction);
         }
     }
     catch (err) {
