@@ -16,10 +16,10 @@ module.exports = {
         if (getHeavy(interaction.user.id)) {
             if (vibeuser == interaction.user) {
                 if (getChastity(vibeuser.id)) {
-                    interaction.reply(`${interaction.user} tries to knock ${getPronouns(interaction.user.id, "possessiveDeterminer")} vibrator off with ${getPronouns(interaction.user.id, "possessiveDeterminer")} thighs, but can't because ${getPronouns(interaction.user.id, "possessiveDeterminer")} arms are useless from the ${getHeavy(interaction.user.id).type}. Well, and ${getPronouns(interaction.user.id, "possessiveDeterminer")} chastity belt of course!`)
+                    interaction.reply(`${interaction.user} tries to knock ${getPronouns(interaction.user.id, "possessiveDeterminer")} vibrator off with ${getPronouns(interaction.user.id, "possessiveDeterminer")} thighs, but ${getPronouns(interaction.user.id, "subject")} can't because ${getPronouns(interaction.user.id, "possessiveDeterminer")} arms are useless from ${getPronouns(interaction.user.id, "possessiveDeterminer")} ${getHeavy(interaction.user.id).type}. Well, and ${getPronouns(interaction.user.id, "possessiveDeterminer")} chastity belt of course!`)
                 }
                 else {
-                    interaction.reply(`${interaction.user}'s ${getHeavy(interaction.user.id).type} prevents them from dexterously reaching the vibrator taped to them!`)
+                    interaction.reply(`${interaction.user}'s ${getHeavy(interaction.user.id).type} prevents ${getPronouns(interaction.user.id, "object")} from dexterously reaching the vibrator taped to ${getPronouns(interaction.user.id, "reflexive")}!`)
                 }
             }
             else {
@@ -39,7 +39,7 @@ module.exports = {
                     // User tries to modify their own vibe settings while in chastity
                     if (getVibe(vibeuser.id)) {
                         // User already has a vibrator on
-                        interaction.reply(`${interaction.user} unlocks ${getPronouns(interaction.user.id, "possessiveDeterminer")} belt, removing the vibrator and then locks it back up!`)
+                        interaction.reply(`${interaction.user} unlocks ${getPronouns(interaction.user.id, "possessiveDeterminer")} belt, removing ${getPronouns(interaction.user.id, "possessiveDeterminer")} vibrator and then locks it back up!`)
                         removeVibe(vibeuser.id)
                     }
                     else {

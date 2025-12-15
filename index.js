@@ -50,7 +50,7 @@ catch (err) {
     console.log(err);
 }
 try {
-    process.pronouns = JSON.parse(fs.readFileSync(`./pronounsusers.txt`))
+    process.pronouns = JSON.parse(fs.readFileSync(`${process.GagbotSavedFileDirectory}/pronounsusers.txt`))
 }
 catch (err) { 
     console.log(err);

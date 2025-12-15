@@ -10,7 +10,7 @@ module.exports = {
 		.setDescription('Put yourself in chastity, locking /vibe settings')
 		.addUserOption(opt =>
 			opt.setName('keyholder')
-			.setDescription('Keyholder (leave blank for unlocked)')
+			.setDescription('Keyholder (leave blank to lock yourself)')
 		),
         /*.addUserOption(opt =>
             opt.setName('collareduser')

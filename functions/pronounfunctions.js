@@ -29,8 +29,8 @@ const pronounsMap = new Map([
         "possessive"              : "theirs",
         "possessiveDeterminer"    : "their",
         "reflexive"               : "themself",
-        "subjectIs"             : "they'll",
-        "subjectWill"           : "they're",
+        "subjectIs"             : "they're",
+        "subjectWill"           : "they'll",
     }],
     ["it/its",{
         "subject"                 : "it",

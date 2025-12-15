@@ -45,7 +45,7 @@ module.exports = {
             }
             else {
                 deleteGag(gaggeduser)
-                interaction.reply(`${interaction.user} has freed ${gaggeduser} from ${getPronouns(interaction.user.id, "possessiveDeterminer")} gag!`)
+                interaction.reply(`${interaction.user} has freed ${gaggeduser} from ${getPronouns(gaggeduser.id, "possessiveDeterminer")} gag!`)
             }
         }
         else {
