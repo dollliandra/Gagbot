@@ -128,7 +128,7 @@ module.exports = {
     }
 
     if (lockedUser.id == newKeyholder.id) {
-      if (transferFunction(lockedUser, newKeyholder.id)) {
+      if (transferFunction(lockedUser.id, newKeyholder.id)) {
         interaction.reply(
           `${
             interaction.user
