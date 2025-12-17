@@ -4,7 +4,7 @@ const { getHeavy } = require('./../functions/heavyfunctions.js')
 const { getPronouns } = require('./../functions/pronounfunctions.js')
 const { getConsent, handleConsent } = require('./../functions/interactivefunctions.js')
 const { getCorset, assignCorset } = require('./../functions/corsetfunctions.js');
-const { getFumbleChance } = require('../functions/keyfindingfunctions.js');
+const { rollKeyFumbleN } = require('../functions/keyfindingfunctions.js');
 const { optins } = require('../functions/optinfunctions.js');
 
 module.exports = {
@@ -60,9 +60,10 @@ module.exports = {
                 // The target is in a chastity belt
                 if ((getChastity(corsetuser.id)?.keyholder == interaction.user.id)) {
                     // User tries to modify the corset settings for someone in chastity that they do have the key for
-                    if (Math.random() < getFumbleChance(interaction.user.id)) {
+                    const fumbleResults = rollKeyFumbleN(interaction.user.id, 2);
+                    if (fumbleResults[0]) {
                         // User fumbles with the key due to their arousal and frustration
-                        if (optins.getKeyDiscarding(corsetuser.id) && Math.random() < getFumbleChance(interaction.user.id)) {
+                        if (optins.getKeyDiscarding(corsetuser.id) && fumbleResults[1]) {
                             // if they fumble again they can lose the key
                             if (corsetuser == interaction.user) {
                                 // User tries to modify their own corset settings while in chastity

@@ -1,16 +1,84 @@
 const { getFindableCollarKeys, findCollarKey } = require("./collarfunctions");
-const {
-  getFindableChastityKeys,
-  findChastityKey,
-  getChastity,
-  getArousal,
-  calcFrustration,
-} = require("./vibefunctions");
+const { getFindableChastityKeys, findChastityKey, getChastity, getArousal, calcFrustration } = require("./vibefunctions");
 const { their } = require("./pronounfunctions");
 const { getMitten } = require("./gagfunctions");
+const { optins } = require("./optinfunctions");
+const fs = require("fs");
+
+const MIN_FUMBLE_TIMEOUT = 60000;
+const MAX_FUMBLE_TIMEOUT = 180000;
+
+// return true if the user fumbles
+function rollKeyFumble(user) {
+  if (process.keyfumbling == undefined) {
+    process.keyfumbling = {};
+  }
+  const now = Date.now();
+  if (process.keyfumbling[user]?.timeoutEnd > now) {
+    process.keyfumbling[user].timeoutEnd += process.keyfumbling[user]?.timeoutEnd - now;
+    fs.writeFileSync(`${process.GagbotSavedFileDirectory}/keyfumbling.txt`, JSON.stringify(process.keyfumbling));
+    return true;
+  } else {
+    process.keyfumbling[user] = {
+      timeoutEnd: now + MIN_FUMBLE_TIMEOUT + Math.floor(Math.random() * (MAX_FUMBLE_TIMEOUT - MIN_FUMBLE_TIMEOUT)),
+    };
+  }
+  const fumbleChance = getFumbleChance(user);
+  if (Math.random() < fumbleChance) {
+    if (optins.getBlessedLuck(user)) {
+      if (process.keyfumbling[user]?.blessing) process.keyfumbling[user].blessing += 1 - fumbleChance;
+      else process.keyfumbling[user].blessing = 1 - fumbleChance;
+      fs.writeFileSync(`${process.GagbotSavedFileDirectory}/keyfumbling.txt`, JSON.stringify(process.keyfumbling));
+    }
+    return true;
+  } else {
+    if (process.keyfumbling[user]?.blessing) process.keyfumbling[user].blessing = 0;
+    fs.writeFileSync(`${process.GagbotSavedFileDirectory}/keyfumbling.txt`, JSON.stringify(process.keyfumbling));
+    return false;
+  }
+}
+
+// use this if the same action causes multiple rolls to not trigger timeout before being done
+function rollKeyFumbleN(user, n) {
+  if (process.keyfumbling == undefined) {
+    process.keyfumbling = {};
+  }
+  const now = Date.now();
+  if (process.keyfumbling[user]?.timeoutEnd > now) {
+    process.keyfumbling[user].timeoutEnd += process.keyfumbling[user]?.timeoutEnd - now;
+    fs.writeFileSync(`${process.GagbotSavedFileDirectory}/keyfumbling.txt`, JSON.stringify(process.keyfumbling));
+    return Array(n).fill(true);
+  } else {
+    process.keyfumbling[user] = {
+      timeoutEnd: now + MIN_FUMBLE_TIMEOUT + Math.floor(Math.random() * (MAX_FUMBLE_TIMEOUT - MIN_FUMBLE_TIMEOUT)),
+    };
+  }
+  const fumbleChance = getFumbleChance(user);
+
+  const results = [];
+  for (let i = 0; i < n; i++) {
+    if (Math.random() < fumbleChance) {
+      if (optins.getBlessedLuck(user)) {
+        if (process.keyfumbling[user]?.blessing) process.keyfumbling[user].blessing += 1 - fumbleChance;
+        else process.keyfumbling[user].blessing = 1 - fumbleChance;
+      }
+      results[i] = true;
+    } else {
+      if (process.keyfumbling[user]?.blessing) process.keyfumbling[user].blessing = 0;
+      results[i] = false;
+    }
+  }
+
+  fs.writeFileSync(`${process.GagbotSavedFileDirectory}/keyfumbling.txt`, JSON.stringify(process.keyfumbling));
+  return results;
+}
 
 // return of 0 = never, 1+ = always
 function getFumbleChance(user) {
+  if (process.keyfumbling == undefined) {
+    process.keyfumbling = {};
+  }
+  if (!optins.getKeyFumbling(user)) return 0;
   let chance = getArousal(user);
   const chastity = getChastity(user);
   if (chastity) {
@@ -23,6 +91,13 @@ function getFumbleChance(user) {
     chance += 10;
     chance *= 1.1;
   }
+
+  if (chance < 100 && optins.getBlessedLuck(user)) {
+    chance -= process.keyfumbling[user]?.blessing ?? 0;
+  }
+
+  // divine intervention
+  if (chance < 100 && Math.random() < 0.02) chance -= 50;
 
   return chance / 100;
 }
@@ -56,31 +131,13 @@ async function handleKeyFinding(message) {
 }
 
 async function sendFindMessage(message, lockedUser, restraint) {
-  if (message.author.id == lockedUser) {
-    message.channel.send(
-      `${message.author} has found the key to ${their(
-        message.author.id
-      )} ${restraint}!`
-    );
-  } else {
-    message.channel.send(
-      `${message.author} has found the key to <@${lockedUser}>'s ${restraint}!`
-    );
-  }
+  if (message.author.id == lockedUser) message.channel.send(`${message.author} has found the key to ${their(message.author.id)} ${restraint}!`);
+  else message.channel.send(`${message.author} has found the key to <@${lockedUser}>'s ${restraint}!`);
 }
 
 async function sendFindFumbleMessage(message, lockedUser, restraint) {
-  if (message.author.id == lockedUser) {
-    message.channel.send(
-      `${message.author} has found the key to ${their(
-        message.author.id
-      )} ${restraint} but fumbles when trying to pick it up!`
-    );
-  } else {
-    message.channel.send(
-      `${message.author} has found the key to <@${lockedUser}>'s ${restraint} but fumbles when trying to pick it up!`
-    );
-  }
+  if (message.author.id == lockedUser) message.channel.send(`${message.author} has found the key to ${their(message.author.id)} ${restraint} but fumbles when trying to pick it up!`);
+  else message.channel.send(`${message.author} has found the key to <@${lockedUser}>'s ${restraint} but fumbles when trying to pick it up!`);
 }
 
 function calcFindSuccessChance(user) {
@@ -90,4 +147,6 @@ function calcFindSuccessChance(user) {
 }
 
 exports.getFumbleChance = getFumbleChance;
+exports.rollKeyFumble = rollKeyFumble;
+exports.rollKeyFumbleN = rollKeyFumbleN;
 exports.handleKeyFinding = handleKeyFinding;

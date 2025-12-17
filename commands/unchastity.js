@@ -5,7 +5,7 @@ const { getHeavy } = require('./../functions/heavyfunctions.js')
 const { getPronouns } = require('./../functions/pronounfunctions.js')
 const { getConsent, handleConsent } = require('./../functions/interactivefunctions.js');
 const { optins } = require('../functions/optinfunctions.js');
-const { getFumbleChance } = require('../functions/keyfindingfunctions.js');
+const { rollKeyFumbleN } = require('../functions/keyfindingfunctions.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -47,9 +47,10 @@ module.exports = {
                 }
                 else {
                     // User fumbles with the key due to their arousal and frustration
-                    if (Math.random() < getFumbleChance(interaction.user.id)) {
+                    const fumbleResults = rollKeyFumbleN(interaction.user.id, 2);
+                    if (fumbleResults[0]) {
                         // if they fumble again they can lose the key
-                        if (optins.getKeyDiscarding(chastitywearer.id) && Math.random() < getFumbleChance(interaction.user.id)) {
+                        if (optins.getKeyDiscarding(chastitywearer.id) && fumbleResults[1]) {
                             // User IS the keyholder for the belt. 
                             if (interaction.user == chastitywearer) {
                                 // Wearer loses key

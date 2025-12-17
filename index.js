@@ -127,6 +127,15 @@ try {
 catch (err) { 
     console.log(err);
 }
+try {
+    if (!fs.existsSync(`${process.GagbotSavedFileDirectory}/keyfumbling.txt`)) {
+        fs.writeFileSync(`${process.GagbotSavedFileDirectory}/keyfumbling.txt`, JSON.stringify({}))
+    }
+    process.keyfumbling = JSON.parse(fs.readFileSync(`${process.GagbotSavedFileDirectory}/keyfumbling.txt`))
+}
+catch (err) { 
+    console.log(err);
+}
 
 // Grab all the command files from the commands directory
 const commands = new Map();
