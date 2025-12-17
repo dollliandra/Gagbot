@@ -48,7 +48,7 @@ const getVibe = (user) => {
     return process.vibe[user];
 }
 
-const removeVibe = (user, vibetype=null) => {
+const removeVibe = (user, vibetype) => {
     if (process.vibe == undefined) { process.vibe = {} }
     if (!vibetype) {
         delete process.vibe[user];
