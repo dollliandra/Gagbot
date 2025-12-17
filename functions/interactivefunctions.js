@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
-const { SlashCommandBuilder, MessageFlags, TextInputStyle, ModalBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, LabelBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, TextDisplayBuilder } = require('discord.js');
+const { SlashCommandBuilder, MessageFlags, TextInputBuilder, TextInputStyle, ModalBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, LabelBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, TextDisplayBuilder } = require('discord.js');
 const { getPronouns } = require('./../functions/pronounfunctions.js')
 
 // Generates a consent button which the user will have to agree to. 
@@ -215,7 +215,100 @@ const timelockChastityModal = (interaction, keyholder) => {
     return modal;
 }
 
+const timelockChastityModal = (interaction, keyholder) => {
+    const modal = new ModalBuilder().setCustomId(`chastitytimelock_${keyholder.id}`).setTitle('Collar Permissions');
+
+    let restrictionWarningText = new TextDisplayBuilder()
+    let warningText = `# Timelock (Chastity Belt)
+This will lock your belt away for a set period of time. Please configure your timelock below.
+-# Once confirmed, you will have a final prompt before the timelock starts`
+
+    restrictionWarningText.setContent(warningText)
+
+    const timelockamt = new TextInputBuilder()
+        .setCustomId('timelockinput')
+        .setStyle(TextInputStyle.Short)
+        .setPlaceholder('e.g. 10 days 5h 24 mins')
+        .setRequired(true)
+
+
+    const accesswhilebound = new StringSelectMenuBuilder()
+        .setCustomId('accesswhilebound')
+        .setPlaceholder('Belt Access')
+        .setRequired(true)
+        .addOptions(
+            new StringSelectMenuOptionBuilder()
+                // Label displayed to user
+                .setLabel('Everyone Else')
+                // Description of option
+                .setDescription('Everyone except you can vibe and corset you')
+                // Value returned to you in modal submission
+                .setValue('access_others'),
+            new StringSelectMenuOptionBuilder()
+                // Label displayed to user
+                .setLabel('Keyholder Only')
+                // Description of option
+                .setDescription('Only the keyholder can access your belt')
+                // Value returned to you in modal submission
+                .setValue('access_kh'),
+            new StringSelectMenuOptionBuilder()
+                // Label displayed to user
+                .setLabel('Nobody')
+                // Description of option
+                .setDescription('Nobody, not even you, can access your belt')
+                // Value returned to you in modal submission
+                .setValue('access_no'),
+        )
+
+    const keyholderafter = new StringSelectMenuBuilder()
+        .setCustomId('keyholderafter')
+        .setPlaceholder('Action after lock')
+        .setRequired(true)
+        .addOptions(
+            new StringSelectMenuOptionBuilder()
+                // Label displayed to user
+                .setLabel('Unlock')
+                // Description of option
+                .setDescription('Unlocks the belt, letting it fall off')
+                // Value returned to you in modal submission
+                .setValue('keyholder_unlock'),
+            new StringSelectMenuOptionBuilder()
+                // Label displayed to user
+                .setLabel('Return')
+                // Description of option
+                .setDescription('Returns the keys to you')
+                // Value returned to you in modal submission
+                .setValue('keyholder_return'),
+            new StringSelectMenuOptionBuilder()
+                // Label displayed to user
+                .setLabel('To Keyholder')
+                // Description of option
+                .setDescription('Returns keys to your keyholder')
+                // Value returned to you in modal submission
+                .setValue('keyholder_keyholder'),
+        )
+
+    const labeltimelockamt = new LabelBuilder()
+        .setLabel(`How long should the timelock be?`)
+        .setTextInputComponent(timelockamt)
+
+    const labelaccesswhilebound = new LabelBuilder()
+        .setLabel(`Who can access during the timelock?`)
+        .setStringSelectMenuComponent(accesswhilebound)
+
+    const labelkeyholderafter = new LabelBuilder()
+        .setLabel(`What happens after?`)
+        .setStringSelectMenuComponent(keyholderafter)
+
+    // Add labels to modal
+    modal.addTextDisplayComponents(restrictionWarningText)
+        .addLabelComponents(labeltimelockamt, labelaccesswhilebound, labelkeyholderafter); 
+
+    return modal;
+}
+
 exports.consentMessage = consentMessage
 exports.getConsent = getConsent
 exports.handleConsent = handleConsent
 exports.collarPermModal = collarPermModal
+exports.timelockChastityModal = timelockChastityModal
