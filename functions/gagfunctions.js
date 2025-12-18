@@ -254,7 +254,7 @@ const garbleMessage = async (msg) => {
                         rej(false);
                     });
                 }).then(() => {
-                    if (!(/\w|\d|\.|\\|\,|\;|\:|\'|\"|\<|\>|\?/).test(outtext)) {
+                    if (!(/[^\u0000-\u0020]/).test(outtext)) {
                         msg.channel.send(msg.content)
                         outtext = "Mistress <@125093095405518850>, I broke the bot! The bot said what I was trying to say, for debugging purposes."
                     }
@@ -266,7 +266,7 @@ const garbleMessage = async (msg) => {
                 })
             }
             else {
-                if (!(/\w|\d|\.|\\|\,|\;|\:|\'|\"|\<|\>|\?/).test(outtext)) {
+                if (!(/[^\u0000-\u0020]/).test(outtext)) {
                     msg.channel.send(msg.content)
                     outtext = "Mistress <@125093095405518850>, I broke the bot! The bot said what I was trying to say, for debugging purposes."
                 }
