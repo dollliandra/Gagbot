@@ -49,15 +49,21 @@ module.exports = {
             outtext = `${outtext}Arousal: **${getArousalDescription(inspectuser.id)}**\n`
             // Chastity status
             if (getChastity(inspectuser.id)) {
+                let isLocked = (getChastity(inspectuser.id)?.keyholder == interaction.user.id || (getChastity(inspectuser.id)?.access === 0 && inspectuser.id != interaction.user.id))
+                let lockemoji = isLocked ? "🔑" : "🔒"
+                let chastitykeyaccess = getChastity(inspectuser.id)?.access
+                let timelockedtext = "Timelocked (Open)"
+                if (chastitykeyaccess == 1) { timelockedtext = "Timelocked (Keyed)" }
+                if (chastitykeyaccess == 2) { timelockedtext = "Timelocked (Sealed)" }
                 if (getChastityTimelock(inspectuser.id)) {
-                    outtext = `${outtext}<:Chastity:1073495208861380629> Chastity: **Timelocked until ${getChastityTimelock(inspectuser.id, true)}**\n`
+                    outtext = `${outtext}<:Chastity:1073495208861380629> Chastity: ${lockemoji} **${timelockedtext} until ${getChastityTimelock(inspectuser.id, true)}**\n`
                 }
                 else if (getChastity(inspectuser.id).keyholder == inspectuser.id) {
                     // Self bound!
-                    outtext = `${outtext}<:Chastity:1073495208861380629> Chastity: **Self-bound!**\n`
+                    outtext = `${outtext}<:Chastity:1073495208861380629> Chastity: ${lockemoji} **Self-bound!**\n`
                 }
                 else {
-                    outtext = `${outtext}<:Chastity:1073495208861380629> Chastity: **Key held by <@${getChastity(inspectuser.id).keyholder}>**\n`
+                    outtext = `${outtext}<:Chastity:1073495208861380629> Chastity: ${lockemoji} **Key held by <@${getChastity(inspectuser.id).keyholder}>**\n`
                 }
             }
             else {
