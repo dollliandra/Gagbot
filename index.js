@@ -119,6 +119,7 @@ try {
 const commands = new Map();
 const modalHandlers = new Map();
 const componentHandlers = new Map();
+const autocompletehandlers = new Map();
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
@@ -130,6 +131,7 @@ for (const file of commandFiles) {
     cmd.componentHandlers?.forEach((handler) => {
         componentHandlers.set(handler.key, handler);
     });
+    if (cmd.autoComplete) autocompletehandlers.set(file, cmd);
 }
 
 var gagged = {}
@@ -183,6 +185,16 @@ client.on('interactionCreate', async (interaction) => {
             componentHandlers.get(key)?.handle(interaction, ...args);
             return;
         } 
+
+        if (interaction.isAutocomplete()) {
+            try {
+                autocompletehandlers.get(`${interaction.commandName}.js`)?.autoComplete(interaction)
+            }
+            catch (err) {
+                console.log(err);
+            }
+            return;
+        }
       
         if ((interaction.channel.id != process.env.CHANNELID) && (interaction.channel.id != process.env.CHANNELIDDEV)) { 
             interaction.reply({ content: `Please use these commands over in <#${process.env.CHANNELID}>.`, flags: discord.MessageFlags.Ephemeral })

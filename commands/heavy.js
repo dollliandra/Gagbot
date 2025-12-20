@@ -11,8 +11,31 @@ module.exports = {
         .addStringOption(opt =>
 			opt.setName('type')
 			.setDescription('What flavor of helpless restraint to wear...')
-			.addChoices(...commandsheavy)
+			//.addChoices(...commandsheavy)
+            .setAutocomplete(true)
 		),
+    async autoComplete(interaction) {
+		const focusedValue = interaction.options.getFocused(); 
+		if (focusedValue == "") { // User hasn't entered anything, lets give them a suggested set of 10
+			let heaviestoreturn = [
+				{ name: "Latex Armbinder", value: "armbinder_latex" },
+				{ name: "Shadow Latex Armbinder", value: "armbinder_shadowlatex" },
+				{ name: "Wolfbinder", value: "armbinder_wolf" },
+				{ name: "Ancient Armbinder", value: "armbinder_ancient" },
+				{ name: "High Security Armbinder", value: "armbinder_secure" },
+				{ name: "Latex Boxbinder", value: "boxbinder_latex" },
+				{ name: "Comfy Straitjacket", value: "straitjacket_comfy" },
+				{ name: "Maid Straitjacket", value: "straitjacket_maid" },
+				{ name: "Doll Straitjacket", value: "straitjacket_doll" },
+				{ name: "Shadow Latex Petsuit", value: "petsuit_shadowlatex" },
+			]
+			await interaction.respond(heaviestoreturn)
+		}
+		else {
+			let heavies = commandsheavy.filter((f) => (f.name.toLowerCase()).includes(focusedValue.toLowerCase())).slice(0,10)
+			await interaction.respond(heavies)
+		}
+	},
     async execute(interaction) {
         try {
             // CHECK IF THEY CONSENTED! IF NOT, MAKE THEM CONSENT
