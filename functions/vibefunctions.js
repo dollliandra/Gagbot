@@ -338,7 +338,7 @@ function tryOrgasm(user) {
   const releaseStrength = RELEASE_STRENGTH;
   const canOrgasm = now - (process.arousal[user]?.lastOrgasm ?? 0) >= ORGASM_COOLDOWN;
 
-  if (canOrgasm && arousal * (1 + Math.random()) / 2 >= (UNBELTED_DECAY * orgasmLimit) / denialCoefficient) {
+  if (canOrgasm && arousal * (1 + Math.random()) / 2 >= orgasmLimit * denialCoefficient) {
     process.arousal[user].lastOrgasm = now;
     addArousal(user, -(decayCoefficient * decayCoefficient * releaseStrength * orgasmLimit) / UNBELTED_DECAY);
     return true;
@@ -351,7 +351,7 @@ function tryOrgasm(user) {
 function calcGrowthCoefficient(user) {
   const vibes = getVibe(user);
   if (!vibes) return 0;
-  return vibes.reduce((a, b) => a + b.intensity, 0);
+  return vibes.reduce((a, b) => a + b.intensity, 0) * 0.4;
 }
 
 // modify when more things affect it

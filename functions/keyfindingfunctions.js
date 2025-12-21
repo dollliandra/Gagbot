@@ -25,10 +25,6 @@ function rollKeyFumble(keyholder, locked) {
     process.keyfumbling[keyholder].timeoutEnd += MIN_FUMBLE_TIMEOUT + Math.floor(Math.random() * (MAX_FUMBLE_TIMEOUT - MIN_FUMBLE_TIMEOUT));
     fs.writeFileSync(`${process.GagbotSavedFileDirectory}/keyfumbling.txt`, JSON.stringify(process.keyfumbling));
     return true;
-  } else {
-    process.keyfumbling[keyholder] = {
-      timeoutEnd: now + MIN_FUMBLE_TIMEOUT + Math.floor(Math.random() * (MAX_FUMBLE_TIMEOUT - MIN_FUMBLE_TIMEOUT)),
-    };
   }
   if (Math.random() < fumbleChance) {
     if (optins.getBlessedLuck(keyholder)) {
@@ -36,6 +32,9 @@ function rollKeyFumble(keyholder, locked) {
       else process.keyfumbling[keyholder].blessing = 1 - fumbleChance;
       fs.writeFileSync(`${process.GagbotSavedFileDirectory}/keyfumbling.txt`, JSON.stringify(process.keyfumbling));
     }
+    process.keyfumbling[keyholder] = {
+      timeoutEnd: now + MIN_FUMBLE_TIMEOUT + Math.floor(Math.random() * (MAX_FUMBLE_TIMEOUT - MIN_FUMBLE_TIMEOUT)),
+    };
     return true;
   } else {
     if (process.keyfumbling[keyholder]?.blessing) process.keyfumbling[keyholder].blessing = 0;
@@ -56,10 +55,6 @@ function rollKeyFumbleN(keyholder, locked, n) {
     process.keyfumbling[keyholder].timeoutEnd += MIN_FUMBLE_TIMEOUT + Math.floor(Math.random() * (MAX_FUMBLE_TIMEOUT - MIN_FUMBLE_TIMEOUT));
     fs.writeFileSync(`${process.GagbotSavedFileDirectory}/keyfumbling.txt`, JSON.stringify(process.keyfumbling));
     return Array(n).fill(true);
-  } else {
-    process.keyfumbling[keyholder] = {
-      timeoutEnd: now + MIN_FUMBLE_TIMEOUT + Math.floor(Math.random() * (MAX_FUMBLE_TIMEOUT - MIN_FUMBLE_TIMEOUT)),
-    };
   }
   const results = [];
   for (let i = 0; i < n; i++) {
@@ -69,6 +64,9 @@ function rollKeyFumbleN(keyholder, locked, n) {
         else process.keyfumbling[keyholder].blessing = 1 - fumbleChance;
       }
       results[i] = true;
+      process.keyfumbling[keyholder] = {
+        timeoutEnd: now + MIN_FUMBLE_TIMEOUT + Math.floor(Math.random() * (MAX_FUMBLE_TIMEOUT - MIN_FUMBLE_TIMEOUT)),
+      };
     } else {
       if (process.keyfumbling[keyholder]?.blessing) process.keyfumbling[keyholder].blessing = 0;
       results[i] = false;
@@ -87,10 +85,10 @@ function getFumbleChance(keyholder, locked) {
   if (!optins.getKeyFumbling(keyholder)) return 0;
   if (keyholder != locked && !optins.getFumbleOthersKeys(keyholder)) return 0;
   if (keyholder != locked && !optins.getOthersKeyFumbling(locked)) return 0;
-  let chance = getArousal(keyholder);
+  let chance = getArousal(keyholder) * 2;
   const chastity = getChastity(keyholder);
   if (chastity) {
-    const hoursBelted = Date.now() - chastity.timestamp / (60 * 60 * 1000);
+    const hoursBelted = (Date.now() - chastity.timestamp) / (60 * 60 * 1000);
     chance += calcFrustration(hoursBelted);
   }
 
