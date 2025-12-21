@@ -168,18 +168,15 @@ const garbleMessage = async (msg) => {
         console.log(totalwords)
         // Now corset any words, using an amount to start with.
         if (getCorset(msg.author.id)) {
-            let wordspermitted = (22 - (getCorset(msg.author.id).tightness * 2)) // subtract 2 for each tightness level
-            if ((totalwords >= wordspermitted) || (getCorset(msg.author.id).tightness >= 7)) { // Only bother modifying at this point if the eligible word count is longer than X words permitted. 
-                for (let i = 0; i < messageparts.length; i++) {
-                    modifiedmessage = true
-                    try {
-                        if (messageparts[i].garble) {
-                            messageparts[i].text = corsetLimitWords(msg.author.id, messageparts[i].text, wordspermitted)
-                            messageparts[i].text = `${messageparts[i].text}\n`
-                        }
+            modifiedmessage = true
+            for (let i = 0; i < messageparts.length; i++) {
+                try {
+                    if (messageparts[i].garble) {
+                        messageparts[i].text = corsetLimitWords(msg.author.id, messageparts[i].text)
+                        messageparts[i].text = `${messageparts[i].text}\n`
                     }
-                    catch (err) { console.log(err) }
                 }
+                catch (err) { console.log(err) }
             }
         }
         // Gags now

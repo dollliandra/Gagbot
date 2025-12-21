@@ -5,7 +5,8 @@ const path = require('path');
 const https = require('https');
 const { garbleMessage } = require(`./functions/gagfunctions.js`);
 const { restartChastityTimers } = require('./functions/timelockfunctions.js');
-const { loadHeavyTypes } = require('./functions/heavyfunctions.js')
+const { loadHeavyTypes } = require('./functions/heavyfunctions.js');
+const { assignCorset } = require('./functions/corsetfunctions.js');
 
 dotenv.config()
 
@@ -112,6 +113,10 @@ try {
         fs.writeFileSync(`${process.GagbotSavedFileDirectory}/corsetusers.txt`, JSON.stringify({}))
     }
     process.corset = JSON.parse(fs.readFileSync(`${process.GagbotSavedFileDirectory}/corsetusers.txt`))
+    // add breath values for old corsets, this only needs to run once
+    for (const user in process.corset) {
+        if (!process.corset[user].breath) assignCorset(user, process.corset[user]?.tightness);
+    }
 } catch (err) { 
     console.log(err);
 }
