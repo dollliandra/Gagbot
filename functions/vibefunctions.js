@@ -238,7 +238,7 @@ function getVibeEquivalent(user) {
 function getArousalDescription(user) {
   const arousal = getArousal(user);
   const denialCoefficient = calcDenialCoefficient(user);
-  const orgasmLimit = (UNBELTED_DECAY * ORGASM_LIMIT) / denialCoefficient;
+  const orgasmLimit = ORGASM_LIMIT * denialCoefficient;
   const orgasmProgress = arousal / orgasmLimit;
   // these numbers are mostly arbitrary
   if (orgasmProgress > 1.4) return "Overstimulated";
