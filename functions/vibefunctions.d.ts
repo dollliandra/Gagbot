@@ -40,6 +40,12 @@ export function getVibeEquivalent(user: Snowflake): number;
 export function getArousalDescription(user: Snowflake): string;
 
 /**
+ * Returns a user-presentable string giving a vague indication of the direction the arousal of the user is going in.
+ * @param user
+ */
+export function getArousalChangeDescription(user: Snowflake): string | null;
+
+/**
  * Returns the current arousal of the user.
  * 1 Arousal is proximately equivalent to a strength 1 vibe pre-arousal system.
  * @param user

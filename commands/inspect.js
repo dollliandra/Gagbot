@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 const { getMitten, getGag, convertGagText, getGagIntensity } = require('./../functions/gagfunctions.js')
-const { getChastity, getVibe, getChastityKeys, getChastityTimelock, getArousalDescription } = require('./../functions/vibefunctions.js')
+const { getChastity, getVibe, getChastityKeys, getChastityTimelock, getArousalDescription, getArousalChangeDescription } = require('./../functions/vibefunctions.js')
 const { getCollar, getCollarPerm, getCollarKeys } = require('./../functions/collarfunctions.js')
 const { getHeavy } = require('./../functions/heavyfunctions.js')
 const { getCorset } = require('./../functions/corsetfunctions.js')
@@ -47,6 +47,8 @@ module.exports = {
             }
             // Arousal status
             outtext = `${outtext}Arousal: **${getArousalDescription(inspectuser.id)}**\n`
+            const change = getArousalChangeDescription(inspectuser.id);
+            if (change) outtext = `${outtext}-# ...${change}\n`
             // Chastity status
             if (getChastity(inspectuser.id)) {
                 let isLocked = (getChastity(inspectuser.id)?.keyholder == interaction.user.id || (getChastity(inspectuser.id)?.access === 0 && inspectuser.id != interaction.user.id))

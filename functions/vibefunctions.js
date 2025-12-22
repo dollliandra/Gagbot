@@ -250,6 +250,20 @@ function getArousalDescription(user) {
   return "Extremely aroused";
 }
 
+function getArousalChangeDescription(user) {
+  if (process.arousal == undefined) process.arousal = {};
+  const arousal = process.arousal[user];
+  if (!arousal || !arousal.lastChange || !arousal.lastTimeStep) return null;
+  const lastChange = arousal.lastChange / arousal.lastTimeStep * arousal.prev;
+  if (Math.abs(lastChange) < 0.01) return null;
+  // these numbers are mostly arbitrary
+  if (lastChange < -2) return "and cooling off rapidly";
+  if (lastChange < 0) return "and cooling off";
+  if (lastChange < 2) return "and getting a little turned on";
+  if (lastChange < ORGASM_LIMIT * 5) return "and getting very hot";
+  return "and rushing to the peaks";
+}
+
 function getArousal(user) {
   if (process.arousal == undefined) process.arousal = {};
   const arousal = process.arousal[user] ?? { prev: 0, prev2: 0 };
@@ -274,6 +288,8 @@ function getArousal(user) {
     timeStep -= 1;
   }
   const next = calcNextArousal(arousal.prev, arousal.prev2, calcGrowthCoefficient(user), calcDecayCoefficient(user), timeStep);
+  arousal.lastChange = next - arousal.prev;
+  arousal.lastTimeStep = timeStep;
   arousal.prev2 = arousal.prev;
   arousal.prev = next;
   arousal.timestamp = now;
@@ -308,8 +324,12 @@ function addArousal(user, change) {
       timeStep -= 1;
     }
     next = calcNextArousal(arousal.prev, arousal.prev2, calcGrowthCoefficient(user), calcDecayCoefficient(user), timeStep) + change;
+    arousal.lastChange = next - arousal.prev;
+    arousal.lastTimeStep = timeStep;
     arousal.prev2 = arousal.prev;
     arousal.timestamp = now;
+  } else {
+    arousal.lastChange += change;
   }
   arousal.prev = next;
   process.arousal[user] = arousal;
@@ -380,6 +400,7 @@ function calcFrustration(hoursBelted) {
 
 exports.getVibeEquivalent = getVibeEquivalent;
 exports.getArousalDescription = getArousalDescription;
+exports.getArousalChangeDescription = getArousalChangeDescription;
 exports.calcFrustration = calcFrustration;
 exports.getArousal = getArousal;
 exports.addArousal = addArousal;
