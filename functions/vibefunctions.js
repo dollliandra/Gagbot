@@ -271,7 +271,7 @@ function getArousal(user) {
   const arousal = process.arousal[user] ?? { prev: 0, prev2: 0 };
   const now = Date.now();
   // skip calculating if last is recent
-  if (now - arousal.timeStep < 1000) return arousal.prev;
+  if (now - arousal.timestamp < 1000) return arousal.prev;
   let timeStep = 1;
   if (arousal.timestamp && arousal.prev < RESET_LIMT) {
     timeStep = (now - arousal.timestamp) / (60 * 1000);
@@ -306,7 +306,7 @@ function addArousal(user, change) {
   const now = Date.now();
   // skip calculating if last is recent
   let next = arousal.prev + change;
-  if (now - arousal.timeStep >= 1000) {
+  if (now - arousal.timestamp >= 1000) {
     let timeStep = 1;
     if (arousal.timestamp && arousal.prev < RESET_LIMT) {
       timeStep = (now - arousal.timestamp) / (60 * 1000);
