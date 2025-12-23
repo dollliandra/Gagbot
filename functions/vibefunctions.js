@@ -20,7 +20,7 @@ const MAX_FRUSTRATION = 100;
 // by how much arousal randomness is biased upwards
 const RANDOM_BIAS = 1;
 // by how much vibe intensity is scaled for the arousal model
-const VIBE_SCALING = 0.4 * 0.66
+const VIBE_SCALING = 0.6;
 // the rate frustration grows at while belted
 const FRUSTRATION_COEFFICIENT = 1.06;
 // the portion of maximum frustration where the growth rate reduces
