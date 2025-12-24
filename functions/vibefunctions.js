@@ -368,7 +368,7 @@ function tryOrgasm(user) {
   const arousal = getArousal(user);
   const denialCoefficient = calcDenialCoefficient(user);
   const orgasmLimit = ORGASM_LIMIT;
-  const canOrgasm = now - (process.arousal[user]?.lastOrgasm ?? 0) >= ORGASM_COOLDOWN;
+  const canOrgasm = true; // now - (process.arousal[user]?.lastOrgasm ?? 0) >= ORGASM_COOLDOWN;
 
   if (canOrgasm && arousal * (RANDOM_BIAS + Math.random()) / (RANDOM_BIAS + 1) >= orgasmLimit * denialCoefficient) {
     process.arousal[user].lastOrgasm = now;
