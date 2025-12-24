@@ -31,7 +31,8 @@ module.exports = {
 
         // cool off response, replace with something good
         interaction.reply(`[TMP] cool off`);
-        clearArousal(interaction.user.id);
+        delete process.arousal[interaction.user.id];
+        fs.writeFileSync(`${process.GagbotSavedFileDirectory}/arousal.txt`, JSON.stringify(process.arousal));
       }
     } catch (err) {
       console.log(err);
