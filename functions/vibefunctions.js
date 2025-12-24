@@ -29,7 +29,7 @@ const FRUSTRATION_BREAKPOINT_TIME = Math.log(FRUSTRATION_BREAKPOINT * MAX_FRUSTR
 // the rate frustration reaches the maximum after the breakpoint
 const FRUSTRATION_MAX_COEFFICIENT = 7;
 // the minimum time between successful orgasms
-const ORGASM_COOLDOWN = 5 * 1000;
+const ORGASM_COOLDOWN = 60 * 1000;
 // the frustration increase caused by failed orgasms
 const ORGASM_FRUSTRATION = 5;
 
@@ -281,6 +281,7 @@ function getArousal(user) {
   if (process.arousal == undefined) process.arousal = {};
   const arousal = process.arousal[user] ?? { prev: 0, prev2: 0 };
   const now = Date.now();
+  if (arousal.timestamp && arousal.timestamp > now) return arousal.prev;
   let timeStep = 1;
   if (arousal.timestamp && arousal.prev < RESET_LIMT) {
     timeStep = (now - arousal.timestamp) / (60 * 1000);
@@ -313,6 +314,10 @@ function addArousal(user, change) {
   if (process.arousal == undefined) process.arousal = {};
   const arousal = process.arousal[user] ?? { prev: 0, prev2: 0 };
   const now = Date.now();
+  if (arousal.timestamp && arousal.timestamp > now) {
+    arousal.prev += change;
+    return arousal.prev;
+  }
   let timeStep = 1;
   if (arousal.timestamp && arousal.prev < RESET_LIMT) {
     timeStep = (now - arousal.timestamp) / (60 * 1000);
@@ -369,6 +374,7 @@ function tryOrgasm(user) {
 
   if (canOrgasm && arousal * (RANDOM_BIAS + Math.random()) / (RANDOM_BIAS + 1) >= orgasmLimit * denialCoefficient) {
     process.arousal[user].lastOrgasm = now;
+    process.arousal[user].timestamp = now + ORGASM_COOLDOWN;
     addArousal(user, -(decayCoefficient * decayCoefficient * releaseStrength * orgasmLimit) / UNBELTED_DECAY);
     return true;
   }
