@@ -43,6 +43,7 @@ try {
     // handle belts locked before frustration was being tracked, can be removed once this has been ran once
     for (const key in process.chastity) {
         if (!process.chastity[key].timestamp) process.chastity[key].timestamp = Date.now();
+        if (!process.chastity[key].extraFrustration) process.chastity[key].extraFrustration = 0;
     }
 }
 catch (err) { 
