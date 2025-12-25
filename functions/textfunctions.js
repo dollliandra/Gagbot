@@ -251,7 +251,7 @@ const texts_gag = {
     heavy: {
         self: {
             gag: [
-
+                `USER_TAG looks at a `
             ],
             nogag: [
 
