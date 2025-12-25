@@ -148,8 +148,8 @@ const convertPronounsText = (text, data) => {
     outtext = outtext.replaceAll("USER_THEIR", getPronouns(interactionuser.id, "possessiveDeterminer"));
     
     // Reflexive - Himself, Herself, Themselves, etc.
-    outtext = outtext.replaceAll("USER_THEMSELF_CAP", getPronouns(interactionuser.id, "possessiveDeterminer", true));
-    outtext = outtext.replaceAll("USER_THEMSELF", getPronouns(interactionuser.id, "possessiveDeterminer"));
+    outtext = outtext.replaceAll("USER_THEMSELF_CAP", getPronouns(interactionuser.id, "reflexive", true));
+    outtext = outtext.replaceAll("USER_THEMSELF", getPronouns(interactionuser.id, "reflexive"));
     
     // SubjectIs - He's, She's, They're
     outtext = outtext.replaceAll("USER_THEYRE_CAP", getPronouns(interactionuser.id, "subjectIs", true));
@@ -188,8 +188,8 @@ const convertPronounsText = (text, data) => {
     outtext = outtext.replaceAll("TARGET_THEIR", getPronouns(targetuser.id, "possessiveDeterminer"));
     
     // Reflexive - Himself, Herself, Themselves, etc.
-    outtext = outtext.replaceAll("TARGET_THEMSELF_CAP", getPronouns(targetuser.id, "possessiveDeterminer", true));
-    outtext = outtext.replaceAll("TARGET_THEMSELF", getPronouns(targetuser.id, "possessiveDeterminer"));
+    outtext = outtext.replaceAll("TARGET_THEMSELF_CAP", getPronouns(targetuser.id, "reflexive", true));
+    outtext = outtext.replaceAll("TARGET_THEMSELF", getPronouns(targetuser.id, "reflexive"));
     
     // SubjectIs - He's, She's, They're
     outtext = outtext.replaceAll("TARGET_THEYRE_CAP", getPronouns(targetuser.id, "subjectIs", true));
