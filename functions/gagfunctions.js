@@ -183,16 +183,16 @@ const garbleMessage = async (threadId, msg) => {
         }
         // Gags now
         if (process.gags == undefined) { process.gags = {} }
-        if (process.gags[`<@${msg.author.id}>`]) {
+        if (process.gags[`${msg.author.id}`]) {
             // Grab all the command files from the commands directory
             const gagtypes = [];
             const commandsPath = path.join(__dirname, '..', 'gags');
             const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
-            if (commandFiles.includes(process.gags[`<@${msg.author.id}>`].gagtype + ".js")) {
+            if (commandFiles.includes(process.gags[`${msg.author.id}`].gagtype + ".js")) {
                 modifiedmessage = true;
-                let gaggarble = require(path.join(commandsPath, `${process.gags[`<@${msg.author.id}>`].gagtype}.js`))
-                let intensity = process.gags[`<@${msg.author.id}>`].intensity ? process.gags[`<@${msg.author.id}>`].intensity : 5
+                let gaggarble = require(path.join(commandsPath, `${process.gags[`${msg.author.id}`].gagtype}.js`))
+                let intensity = process.gags[`${msg.author.id}`].intensity ? process.gags[`${msg.author.id}`].intensity : 5
                 console.log(messageparts);
                 if (gaggarble.messagebegin) {
                     try {
