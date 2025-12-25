@@ -130,14 +130,14 @@ module.exports = {
                     if (actiontotake == "mittens") {
                         data.mitten = true
                         if (getCollarPerm(collareduser.id, "mitten")) {
-                            if (getMitten(collareduser)) {
+                            if (getMitten(collareduser.id)) {
                                 data.alreadyworn = true
-                                interaction.reply({ content: getText(data), flags: MessageFlags.Ephemeral })
+                                interaction.reply({ content: `${collareduser} is already wearing mittens!`, flags: MessageFlags.Ephemeral })
                             }
                             else {
                                 data.allowed = true
-                                interaction.reply(getText(data))
-                                assignMitten(collareduser);
+                                interaction.reply(`${interaction.user} grabs ${collareduser}'s hands, shoving a pair of mittens on, and putting a lock on the straps, sealing away ${getPronouns(collareduser.id, "possessiveDeterminer")} hands!`)
+                                assignMitten(collareduser.id);
                             }
                         }
                         else {
@@ -148,9 +148,9 @@ module.exports = {
                     else if (actiontotake == "heavy") {
                         data.heavybondage = true
                         if (getCollarPerm(collareduser.id, "heavy")) {
-                            if (getHeavy(collareduser)) {
+                            if (getHeavy(collareduser.id)) {
                                 data.alreadyworn = true
-                                interaction.reply({ content: getText(data), flags: MessageFlags.Ephemeral })
+                                interaction.reply({ content: `${collareduser} is already in bondage, wearing a ${getHeavy(collareduser.id).type}!`, flags: MessageFlags.Ephemeral })
                             }
                             else {
                                 data.allowed = true
