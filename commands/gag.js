@@ -128,8 +128,10 @@ module.exports = {
 			}
 			else if (getMitten(interaction.user.id)) {
 				// We are wearing mittens, we can't hold onto the straps!
+				data.noheavy = true
+				data.mitten = true
 				if (interaction.user.id != gaggeduser.id) {
-					interaction.reply(`${interaction.user} attempts to gag someone, but fumbles at holding the gag in ${getPronouns(interaction.user.id, "possessiveDeterminer")} mittens!`)
+					interaction.reply()
 				}
 				else {
 					interaction.reply(`${interaction.user} attempts to gag ${getPronouns(interaction.user.id, "reflexive")}, but can't get a good grip on the straps with ${getPronouns(interaction.user.id, "possessiveDeterminer")} mittens!`)

@@ -259,10 +259,17 @@ const texts_gag = {
         },
         other: {
             gag: [
-
+                `USER_TAG uses USER_THEIR toes to pick up a VAR_C3 by the straps and put it on TARGET_TAG, but without arms, USER_THEY can't undo TARGET_THEIR VAR_C4 to switch it out!`
             ],
             nogag: [
-
+                `USER_TAG flops over a table to pick up a VAR_C3 and take it over to TARGET_TAG and put it on TARGET_THEM, but USER_THEY lack arms and fingers to work with the straps!`
+            ]
+        }
+    },
+    noheavy: {
+        mitten: {
+            self: [
+                `USER_TAG attempts to gag TARGET_TAG, but fumbles at holding the gag in USER_THEIR mittens!`
             ]
         }
     }
