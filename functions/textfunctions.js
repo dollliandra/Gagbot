@@ -251,10 +251,10 @@ const texts_gag = {
     heavy: {
         self: {
             gag: [
-                `USER_TAG looks at a `
+                `USER_TAG looks at a VAR_C4, attempting to spit out USER_THEIR VAR_C3 and change it, but the straps hold firm! Maybe if USER_THEY had fingers USER_THEY could change USER_THEIR gag!`
             ],
             nogag: [
-
+                `USER_TAG squirms a bit, but USER_THEIR arms are trapped! Someone should help USER_THEM with putting a VAR_C3 on!`
             ]
         },
         other: {

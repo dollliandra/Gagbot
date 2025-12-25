@@ -55,6 +55,7 @@ module.exports = {
 			let gagtype = interaction.options.getString('gag') ? interaction.options.getString('gag') : 'ball'
 			let gagintensity = interaction.options.getNumber('intensity') ? interaction.options.getNumber('intensity') : 5
 			let gagname = gagtypes.find(g => g.value == gagtype).name;
+			let oldgagname = gagtypes.find(g => g.value == getGag(gaggeduser.id)?.gagtype).name;
 			let intensitytext = " loosely"
 			try {
 				let gagfile = require(path.join(commandsPath, `${gagtype}.js`))
@@ -85,7 +86,9 @@ module.exports = {
                     interactionuser: interaction.user,
                     targetuser: gaggeduser,
                     c1: getHeavy(interaction.user.id)?.type, // heavy bondage type
-                    c2: intensitytext // gag tightness 
+                    c2: intensitytext, // gag tightness 
+					c3: gagname, // New gag being put on the wearer
+					c4: oldgagname // Old gag the wearer has on
                 }
             }
 
@@ -96,6 +99,27 @@ module.exports = {
 					// gagging self
 					data.self = true
 					if (getGag(interaction.user.id)) {
+						// has a gag already
+						data.gag = true
+						interaction.reply(getData(data))
+					}
+					else {
+						// No gag already
+						data.nogag = true
+						interaction.reply(getData(data))
+					}
+				}
+				else {
+					// gagging another
+					data.other = true
+					if (getGag(gaggeduser.id)) {
+						// has a gag already
+						data.gag = true
+						interaction.reply(getData(data))
+					}
+					else {
+						// No gag already
+						data.nogag = true
 						interaction.reply(getData(data))
 					}
 				}
