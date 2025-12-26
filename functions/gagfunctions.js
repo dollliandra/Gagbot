@@ -167,6 +167,7 @@ const garbleMessage = async (threadId, msg) => {
         console.log(totalwords)
         // Now corset any words, using an amount to start with.
         if (getCorset(msg.author.id)) {
+            const hadParts = messageparts.length > 0;
             modifiedmessage = true
             const toRemove = [];
             for (let i = 0; i < messageparts.length; i++) {
@@ -182,7 +183,7 @@ const garbleMessage = async (threadId, msg) => {
             for (let i = toRemove.length - 1; i >= 0; i--) {
                 messageparts.splice(toRemove[i], 1);
             }
-            if (messageparts.length == 0) {
+            if (hadParts && messageparts.length == 0) {
                 msg.delete();
                 return;
             }

@@ -5,7 +5,10 @@ const BREATH_RECOVERY_TABLE = [2000, 11.5, 9.5, 8, 6.5, 5, 4, 3.2, 2.5, 2, 1.5, 
 
 const gaspSounds = ["*hff*", "*hnnf*", "*ahff*", "*hhh*", "*nnn*", "*hnn*", "*hng*", "*uah*", "*uhh*"];
 const silenceReplacers = [" ", ".", ",", ""];
-const specialCharacterCosts = new Map(["!", 4], ["-", 0]);
+const specialCharacterCosts = new Map([
+  ["!", 4],
+  ["-", 0],
+]);
 
 const assignCorset = (user, tightness = 5) => {
   if (process.corset == undefined) process.corset = {};
@@ -109,7 +112,7 @@ function corsetLimitWords(user, text) {
     outtext = outtext.replace(/^\s*\-#\s/, "");
     outtext = outtext.replaceAll(/\n\s*\-#\s/g, "\n");
     outtext = outtext.replaceAll("\n", "\n-# ");
-    outtext = `-# ${outtext}`;
+    if (outtext.length > 0) outtext = `-# ${outtext}`;
   }
   return outtext;
 }
