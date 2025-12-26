@@ -359,6 +359,80 @@ const texts_mitten = {
     }
 }
 
+const texts_unchastity = {
+    heavy: {
+        self: {
+            chastity: [
+                `USER_TAG shifts in USER_THEIR VAR_C1, trying to squirm out of USER_THEIR chastity belt, but USER_THEIR metal prison holds firmly to USER_THEIR body!`
+            ],
+            // ephemeral
+            nochastity: [
+                `You're not in a chastity belt, but you wouldn't be able to remove it anyway!`
+            ]
+        },
+        other: {
+            chastity: [
+                `USER_TAG shifts in USER_THEIR VAR_C1, trying to help TARGET_TAG out of TARGET_THEIR chastity belt, but can't get a good grip on the locking mechanism because of USER_THEIR bondage!`
+            ],
+            // ephemeral
+            nochastity: [
+                `TARGET_TAG is not in a chastity belt, but you wouldn't be able to remove it anyway!`
+            ]
+        }
+    },
+    noheavy: {
+        self: {
+            chastity: {
+                key: {
+                    fumble: {
+                        discard: [
+                            `USER_TAG tries to put the key in the lock on USER_THEIR belt, but USER_THEIR hands are so shaky that the key slips and falls somewhere with a klang!`
+                        ],
+                        nodiscard: [
+                            `USER_TAG tries to put the key in the lock on USER_THEIR belt, but USER_THEY struggleUSER_S to guide it in the mechanism!`
+                        ]
+                    },
+                    nofumble: [
+                        `USER_TAG puts the key in the lock on USER_THEIR belt and unlocks it, freeing USER_THEMSELF from that wretched prison!`
+                    ]
+                },
+                nokey: [
+                    `USER_TAG runs USER_THEIR fingers uselessly on the metal of USER_THEIR chastity belt, but USER_THEY can't unlock it without the key!`
+                ]
+            },
+            // ephemeral
+            nochastity: [
+                `You aren't wearing a chastity belt!`
+            ]
+        },
+        other: {
+            chastity: {
+                key: {
+                    fumble: {
+                        discard: [
+                            `USER_TAG tries to use the key for TARGET_TAG's belt, but USER_THEIR thoughts cause a momentary slip-up and the key falls somewhere!`
+                        ],
+                        nodiscard: [
+
+                        ]
+                    },
+                    nofumble: [
+
+                    ]
+                },
+                // ephemeral
+                nokey: [
+                    `You don't have the key for TARGET_TAG's belt!`
+                ]
+            },
+            // ephemeral
+            nochastity: [
+                `TARGET_TAG is not wearing chastity!`
+            ]
+        }
+    }
+}
+
 
 const textarrays = {
     texts_chastity: texts_chastity,
@@ -369,7 +443,7 @@ const textarrays = {
     texts_heavy: texts_heavy,
     texts_letgo: texts_letgo,
     texts_mitten: texts_mitten,
-
+    texts_unchastity: texts_unchastity
 }
 
 
