@@ -102,13 +102,23 @@ function getFindFunction(restraint) {
 }
 
 async function sendFindMessage(message, lockedUser, restraint) {
-  if (message.author.id == lockedUser) message.channel.send(`${message.author} has found the key to ${their(message.author.id)} ${restraint}!`);
-  else message.channel.send(`${message.author} has found the key to <@${lockedUser}>'s ${restraint}!`);
+  try {
+    if (message.author.id == lockedUser) message.channel.send(`${message.author} has found the key to ${their(message.author.id)} ${restraint}!`);
+    else message.channel.send(`${message.author} has found the key to <@${lockedUser}>'s ${restraint}!`);
+  }
+  catch (err) {
+    console.log(err); // Seriously plz dont crash
+  }
 }
 
 async function sendFindFumbleMessage(message, lockedUser, restraint) {
-  if (message.author.id == lockedUser) message.channel.send(`${message.author} has found the key to ${their(message.author.id)} ${restraint} but fumbles when trying to pick it up!`);
-  else message.channel.send(`${message.author} has found the key to <@${lockedUser}>'s ${restraint} but fumbles when trying to pick it up!`);
+  try {
+    if (message.author.id == lockedUser) message.channel.send(`${message.author} has found the key to ${their(message.author.id)} ${restraint} but fumbles when trying to pick it up!`);
+    else message.channel.send(`${message.author} has found the key to <@${lockedUser}>'s ${restraint} but fumbles when trying to pick it up!`);
+  }
+  catch (err) {
+    console.log(err); // Seriously plz dont crash
+  }
 }
 
 function calcFindSuccessChance(user) {

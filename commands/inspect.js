@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, MessageFlags } = require('discord.js');
-const { getMitten, getGag, convertGagText, getGagIntensity } = require('./../functions/gagfunctions.js')
+const { getMittenName, getMitten, getGag, convertGagText, getGagIntensity } = require('./../functions/gagfunctions.js')
 const { getChastity, getVibe, getChastityKeys, getChastityTimelock, getArousalDescription, getArousalChangeDescription } = require('./../functions/vibefunctions.js')
 const { getCollar, getCollarPerm, getCollarKeys } = require('./../functions/collarfunctions.js')
 const { getHeavy } = require('./../functions/heavyfunctions.js')
@@ -33,7 +33,12 @@ module.exports = {
             }
             // Mitten status
             if (getMitten(inspectuser.id)) {
-                outtext = `${outtext}<:mittens:1452425463757803783> Mittens: **WORN**\n`
+                if (getMittenName(inspectuser.id)) {
+                    outtext = `${outtext}<:mittens:1452425463757803783> Mittens: **${getMittenName(inspectuser.id)}**\n`
+                }
+                else {
+                    outtext = `${outtext}<:mittens:1452425463757803783> Mittens: **WORN**\n`
+                }
             }
             else {
                 outtext = `${outtext}<:mittens:1452425463757803783> Mittens: Not currently worn.\n`
@@ -58,7 +63,10 @@ module.exports = {
                 let timelockedtext = "Timelocked (Open)"
                 if (chastitykeyaccess == 1) { timelockedtext = "Timelocked (Keyed)" }
                 if (chastitykeyaccess == 2) { timelockedtext = "Timelocked (Sealed)" }
-                if (getChastityTimelock(inspectuser.id)) {
+                if (getChastity(inspectuser.id).keyholder == "discarded") {
+                    outtext = `${outtext}<:Chastity:1073495208861380629> Chastity: ${lockemoji} **Keys are Missing!**\n`
+                }
+                else if (getChastityTimelock(inspectuser.id)) {
                     outtext = `${outtext}<:Chastity:1073495208861380629> Chastity: ${lockemoji} **${timelockedtext} until ${getChastityTimelock(inspectuser.id, true)}**\n`
                 }
                 else if (getChastity(inspectuser.id).keyholder == inspectuser.id) {
@@ -96,7 +104,16 @@ module.exports = {
             }
             // Collar status
             if (getCollar(inspectuser.id)) {
-                if (!getCollar(inspectuser.id).keyholder_only) {
+                if (getCollar(inspectuser.id).keyholder == "discarded") {
+                    // Self bound!
+                    if (getCollar(inspectuser.id).keyholder_only) {
+                        outtext = `${outtext}<:collar:1449984183261986939> Collar: **Keys are Missing!**\n`
+                    }
+                    else {
+                        outtext = `${outtext}<:collar:1449984183261986939> Collar: **Keys are Missing! Free Use!**\n`
+                    }
+                }
+                else if (!getCollar(inspectuser.id).keyholder_only) {
                     // Free use!
                     if (getCollar(inspectuser.id).keyholder == inspectuser.id) {
                         outtext = `${outtext}<:collar:1449984183261986939> Collar: **Self-bound and free use!**\n`
