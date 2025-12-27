@@ -75,7 +75,7 @@ function corsetLimitWords(user, text) {
 
       if (word.length < 3) corset.breath -= (3 - word.length) * globalMultiplier;
 
-      if (corset.breath < -1.5 * corset.maxBreath && newwordsinmessage.length > 5 - Math.ceil(corset.tightness / 2)) silence = true;
+      if (corset.breath < -corset.maxBreath && newwordsinmessage.length > 5 - Math.ceil(corset.tightness / 2)) silence = true;
 
       // add gasping sounds once at half of max breath
       if (
