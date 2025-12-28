@@ -327,7 +327,7 @@ function addArousal(user, change) {
 }
 
 function clearArousal(user) {
-  process.arousal[user] = { arousal: 0, timestamp: Date.now() };
+  process.arousal[user] = { arousal: 0, prev: 0, timestamp: Date.now() };
   fs.writeFileSync(`${process.GagbotSavedFileDirectory}/arousal.txt`, JSON.stringify(process.arousal));
 }
 
@@ -348,7 +348,6 @@ function tryOrgasm(user) {
   const orgasmLimit = ORGASM_LIMIT;
 
   if (arousal * (RANDOM_BIAS + Math.random()) / (RANDOM_BIAS + 1) >= orgasmLimit * denialCoefficient) {
-    process.arousal[user].lastOrgasm = now;
     setArousalCooldown(user)
     const chastity = getChastity(user);
     if (chastity) {
