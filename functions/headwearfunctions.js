@@ -49,11 +49,14 @@ const getHeadwear = (userID) => {
 const deleteHeadwear = (userID, headwear) => {
     if (process.headwear == undefined) { process.headwear = {} }
     if (!process.headwear[userID]) { return false }
-    if (headwear && process.headwear[userID].wornheadwear.some((h) => { return h == headwear })) {
-        process.headwear[userID].wornheadwear.splice(process.headwear[userID].indexOf(headwear))
+    if (headwear && process.headwear[userID].wornheadwear.includes(headwear)) {
+        process.headwear[userID].wornheadwear.splice(process.headwear[userID].wornheadwear.indexOf(headwear), 1)
         if (process.headwear[userID].wornheadwear.length == 0) {
             delete process.headwear[userID]
         }
+    }
+    else if (process.headwear[userID]) {
+        delete process.headwear[userID];
     }
     fs.writeFileSync(`${process.GagbotSavedFileDirectory}/headwearusers.txt`, JSON.stringify(process.headwear));
 }

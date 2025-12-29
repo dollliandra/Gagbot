@@ -8,7 +8,7 @@ const { getText } = require("./../functions/textfunctions.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('unheadwear')
+		.setName('unmask')
 		.setDescription(`Remove headwear from someone. . .`)
 		.addUserOption(opt =>
 			opt.setName('user')

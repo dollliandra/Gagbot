@@ -909,7 +909,7 @@ const texts_unheadwear = {
                 },
                 multiple: {
                     worn: [
-                        `USER_TAG carefully undoes the straps on all of the headgear USER_THEY are wearing, gently pulling it off of USER_THEIR head, one by one!`
+                        `USER_TAG carefully undoes the straps on all of the headgear USER_THEY USER_ISARE wearing, gently pulling it off of USER_THEIR head, one by one!`
                     ],
                     // Ephemeral
                     noworn: [
