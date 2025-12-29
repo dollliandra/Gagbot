@@ -16,6 +16,9 @@ const collartypes = [
     { name: "Kitty Collar", value: "collar_kitty" },
     { name: "Sheep Collar", value: "collar_sheep" },
     { name: "Potion Collar", value: "collar_potion" },
+    { name: "Princess Collar", value: "collar_princess" },
+    { name: "Star-cursed Collar", value: "collar_star" },
+    { name: "Moonveil Collar", value: "collar_moon" },
 ]
 
 const assignCollar = (user, keyholder, restraints, only, customcollar) => {

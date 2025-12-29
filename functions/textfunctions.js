@@ -713,7 +713,7 @@ const texts_uncorset = {
                             ]
                         },
                         nofumble: [
-                            `USER_TAG unlocks TARGET_TAG's chastity belt, then removes TARGET_THEIR corset! While TARGET_THEY are breathing fresh air again, USER_THEY lockUSER_S TARGET_THEM back in TARGET_THEIR chastity belt!`
+                            `USER_TAG unlocks TARGET_TAG's chastity belt, then removes TARGET_THEIR corset! While TARGET_THEY TARGET_ISARE breathing fresh air again, USER_THEY lockUSER_S TARGET_THEM back in TARGET_THEIR chastity belt!`
                         ]
                     },
                     public: [
