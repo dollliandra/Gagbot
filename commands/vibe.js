@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, MessageFlags } = require('discord.js');
-const { getChastity, getVibe, assignVibe, discardChastityKey } = require('./../functions/vibefunctions.js')
+const { getChastity, getVibe, assignVibe, discardChastityKey, canAccessChastity } = require('./../functions/vibefunctions.js')
 const { getHeavy } = require('./../functions/heavyfunctions.js')
 const { getPronouns } = require('./../functions/pronounfunctions.js')
 const { getConsent, handleConsent } = require('./../functions/interactivefunctions.js')
@@ -153,7 +153,7 @@ module.exports = {
                         if (getChastity(vibeuser.id)) {
                             // in chastity
                             data.chastity = true
-                            if ((getChastity(vibeuser.id)?.access == undefined) && getChastity(vibeuser.id).keyholder == interaction.user.id) {
+                            if (canAccessChastity(vibeuser.id, interaction.user.id).access) {
                                 // We have the key to the belt and it is NOT timelocked
                                 data.key = true
                                 const fumbleResults = rollKeyFumbleN(interaction.user.id, vibeuser.id, 2);
@@ -236,7 +236,7 @@ module.exports = {
                         if (getChastity(vibeuser.id)) {
                             // in chastity
                             data.chastity = true
-                            if ((getChastity(vibeuser.id)?.access == undefined) && getChastity(vibeuser.id).keyholder == interaction.user.id) {
+                            if (canAccessChastity(vibeuser.id, interaction.user.id).access) {
                                 // We have the key to the belt and it is NOT timelocked
                                 data.key = true
                                 const fumbleResults = rollKeyFumbleN(interaction.user.id, vibeuser.id, 2);
@@ -324,7 +324,7 @@ module.exports = {
                         if (getChastity(vibeuser.id)) {
                             // in chastity
                             data.chastity = true
-                            if ((getChastity(vibeuser.id)?.access !== 2) && (getChastity(vibeuser.id).keyholder == interaction.user.id)) {
+                            if (canAccessChastity(vibeuser.id, interaction.user.id).access) {
                                 // We have the key to the belt
                                 data.key = true
                                 const fumbleResults = rollKeyFumbleN(interaction.user.id, vibeuser.id, 2);
@@ -424,7 +424,7 @@ module.exports = {
                         if (getChastity(vibeuser.id)) {
                             // in chastity
                             data.chastity = true
-                            if ((getChastity(vibeuser.id)?.access == undefined) && getChastity(vibeuser.id).keyholder == interaction.user.id) {
+                            if (canAccessChastity(vibeuser.id, interaction.user.id).access) {
                                 // We have the key to the belt and it is NOT timelocked
                                 data.key = true
                                 const fumbleResults = rollKeyFumbleN(interaction.user.id, vibeuser.id, 2);

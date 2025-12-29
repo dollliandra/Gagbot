@@ -162,6 +162,61 @@ const getChastityKeyholder = (user) => {
     return process.chastity[user]?.keyholder;
 }
 
+// Returns an object you can check the .access prop of. 
+// Unlock actions should set the third param true to ensure
+// that users are not unlocking public access. 
+const canAccessChastity = (chastityuser, keyholder, unlock) => {
+    // As a reference for access in timelocks:
+    // 0: "Everyone Else"
+    // 1: "Keyholder Only"
+    // 2: "Nobody"
+
+    let accessval = {
+        access: false,
+        public: false,
+        hasbelt: true
+    }
+    // no belt, no need
+    if (!getChastity(chastityuser)) { 
+        accessval.hasbelt = false;
+        return accessval;
+    } 
+    // Sealed Belt - nobody gets in!
+    if (getChastity(chastityuser).access == 2) {
+        return accessval;
+    }
+    // If unlock is set, only allow access to unlock if the keyholder is the correct one.
+    if (unlock) {
+        // Allow unlocks by a non-self keyholder at all times, assuming its not sealed. 
+        if ((getChastity(chastityuser).access != 2) && (getChastity(chastityuser).keyholder == keyholder) && (keyholder != chastityuser)) {
+            accessval.access = true;
+        }
+        // Allow unlocks by any keyholder if no timelock. 
+        if ((getChastity(chastityuser).access == undefined) && (getChastity(chastityuser).keyholder == keyholder)) {
+            accessval.access = true;
+        }
+        // Else, return false.
+
+        return accessval;
+    }
+    // Others access only when access is set to 0. 
+    if ((getChastity(chastityuser).access == 0) && (keyholder != chastityuser)) {
+        accessval.access = true;
+        accessval.public = true;
+    }
+    // Keyholder access if access is unset (no timelocks)
+    if ((getChastity(chastityuser).access == undefined) && (getChastity(chastityuser).keyholder == keyholder)) {
+        accessval.access = true;
+    }
+    // Keyholder access if timelock is 1 (keyholder only) but only if not self.
+    if ((getChastity(chastityuser).access == 1) && (getChastity(chastityuser).keyholder == keyholder) && (chastityuser != keyholder)) {
+        accessval.access = true;
+    }
+    // Else, return false. 
+    
+    return accessval;
+}
+
 // transfer keys and returns whether the transfer was successful
 const transferChastityKey = (lockedUser, newKeyholder) => {
     if (process.chastity == undefined) { process.chastity = {} }
@@ -435,3 +490,4 @@ exports.findChastityKey = findChastityKey;
 exports.chastitytypes = chastitytypes;
 exports.chastitytypesoptions = chastitytypesoptions;
 exports.getChastityName = getChastityName;
+exports.canAccessChastity = canAccessChastity;

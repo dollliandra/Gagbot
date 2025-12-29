@@ -284,7 +284,7 @@ module.exports = {
                                 }
                             }
                             else {
-                                data.namedchastity = true
+                                data.nonamedchastity = true
                                 if (getChastity(collareduser.id)) {
                                     // Cant equip it on them 
                                     data.alreadyworn = true

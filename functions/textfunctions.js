@@ -134,10 +134,7 @@ const texts_collarequip = {
                             key_other: [
                                 `USER_TAG grabs TARGET_TAG and wraps a VAR_C3 around TARGET_THEIR waist before clicking the lock shut and tossing the key over to VAR_C5! TARGET_THEY_CAP will no doubt have to earn TARGET_THEIR chastity back!`
                             ]
-                        },
-                        notallowed: [
-                            `TARGET_TAG's collar does not allow you to put TARGET_THEM in chastity!`
-                        ]
+                        }
                     },
                     nonamedchastity: {
                         alreadyworn: [
@@ -155,6 +152,9 @@ const texts_collarequip = {
                             `TARGET_TAG's collar does not allow you to put TARGET_THEM in chastity!`
                         ]
                     },
+                    notallowed: [
+                        `TARGET_TAG's collar does not allow you to put TARGET_THEM in chastity!`
+                    ]
                 } 
             },
             nokey: [
@@ -364,6 +364,66 @@ const texts_gag = {
         }
     }
 }
+
+// Headwear stuff
+const texts_headwear = {
+    heavy: {
+        self: {
+            worn: [
+                `You are already wearing a VAR_C2, but you wouldn't be able to put it on anyway!`
+            ],
+            noworn: [
+                `TARGET_TAG is already wearing a VAR_C2, but you wouldn't be able to put it on TARGET_THEM anyway!`
+            ]
+        },
+        other: {
+            worn: [
+
+            ],
+            noworn: [
+
+            ]
+        }
+    },
+    noheavy: {
+        mitten: {
+            self: {
+                worn: [
+
+                ],
+                noworn: [
+
+                ]
+            },
+            other: {
+                worn: [
+
+                ],
+                noworn: [
+
+                ]
+            }
+        },
+        nomitten: {
+            self: {
+                worn: [
+
+                ],
+                noworn: {
+
+                }
+            },
+            other: {
+                worn: [
+
+                ],
+                noworn: {
+
+                }
+            }
+        }
+    }
+} 
 
 // Thank goodness this one is tiny lol
 const texts_heavy = {
