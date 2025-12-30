@@ -54,6 +54,7 @@ const heavytypes = [
     { name: "Hardlight Cuffs (hogtie)", value: "hardlight_hogtie", denialCoefficient: 3 },
     { name: "Hardlight Cuffs (strict)", value: "hardlight_strict", denialCoefficient: 4.5 },
     { name: "Bed Restraints", value: "bedrestraints", denialCoefficient: 6 },
+    { name: "Chair with Cuffs", value: "chaircuffs", denialCoefficient: 3.5 },
 ];
 
 
