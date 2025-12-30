@@ -4,6 +4,7 @@ const { timelockChastity } = require("../functions/timelockfunctions.js");
 const { getChastityKeyholder } = require("../functions/vibefunctions.js");
 const { rollKeyFumbleN, rollKeyFumble } = require("../functions/keyfindingfunctions.js");
 const { optins } = require("../functions/optinfunctions.js");
+const { getPronouns } = require('./../functions/pronounfunctions.js')
 
 module.exports = {
   async modalexecute(interaction) {
@@ -12,7 +13,10 @@ module.exports = {
     let keyholder = interaction.user.id;
     const split = interaction.customId.split("_");
     const wearer = split[1];
-    const tempKeyholder = interaction.fields.getSelectedUsers("userselection")?.keys()[0];
+    let tempKeyholder;
+    if (wearer == keyholder) { // Should only ever be true if they're the same!
+      tempKeyholder = interaction.fields.getSelectedUsers("userselection")?.keys()[0];
+    } 
     if (tempKeyholder) keyholder = tempKeyholder;
     const timeString = interaction.fields.getTextInputValue("timelockinput");
     const timeStringSplit = timeString.split("-");
@@ -118,10 +122,10 @@ function buildConfirmMessage(wearer, keyholder, minUnlockTime, maxUnlockTime, ac
   const timeString = maxUnlockTime ? `<t:${(minUnlockTime / 1000) | 0}:f> - <t:${(maxUnlockTime / 1000) | 0}:f>` : `<t:${(minUnlockTime / 1000) | 0}:f>`;
   const unlockTime = maxUnlockTime ? Math.floor(minUnlockTime + Math.random() * (maxUnlockTime - minUnlockTime)) : minUnlockTime;
 
-  const warning = Math.max(minUnlockTime, maxUnlockTime) - Date.now() > 24 * 60 * 60 * 1000 ? "\n# YOU MAY LOCK YOURSELF FOR LONGER THAN 24 HOURS" : "";
+  const warning = Math.max(minUnlockTime, maxUnlockTime) - Date.now() > 24 * 60 * 60 * 1000 ? `\n# YOU MAY LOCK ${(wearer == keyholder) ? `YOURSELF` : getPronouns(wearer, "object").toUpperCase()} FOR LONGER THAN 24 HOURS` : "";
 
   return {
-    content: `# Timelock (Chastity Belt)\nConfirm locking the belt until ${timeString}${warning}\nNote: Frustration may cause the actual unlock time to be later`,
+    content: `# Timelock (Chastity Belt)\nConfirm locking ${(wearer == keyholder) ? `your chastity belt` : `<@${wearer}>'s chastity belt`} until ${timeString}?${warning}\nNote: Frustration may cause the actual unlock time to be later`,
     flags: MessageFlags.Ephemeral,
     components: [
       {
