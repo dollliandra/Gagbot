@@ -6,6 +6,20 @@
 // Character maps stored in an array in a separate file for code cleanliness
 const {ballGagCharMaps} = require('./ball/ballCharMap.js')
 
+
+const isAllCaps = (text) => {
+    //(words[x].match(/[A-Z]/) && !words[x].match(/[a-z]/)) ? true : false;
+    return text == text.toLowerCase().toUpperCase()
+}
+
+const totalAlphas = (text) => {
+    let count = 0
+    for(let itr = 0; itr < text.length; itr++){
+        if (text[itr].match(/[A-Za-z]/)){count++}
+    }
+    return count;
+}
+
 // Helper function to garble a text segment.
 const garbleText = (text, intensity) => {
 
@@ -16,13 +30,13 @@ const garbleText = (text, intensity) => {
 
     for(let x = 0; x < words.length; x++){
     
-        let allCaps = (words[x].match(/[A-Z]/) && !words[x].match(/[a-z]/)) ? true : false;
-
+        let allCaps = isAllCaps(words[x])
         // Special case for "I", "a", etc.
-        if(allCaps && words[x].length == 1){
-            if((words[x-1] && (words[x-1].match(/[A-Z]/) && !words[x-1].match(/[a-z]/)))
-            || (words[x+1] && (words[x+1].match(/[A-Z]/) && !words[x+1].match(/[a-z]/)))){
-
+        if(allCaps && totalAlphas(words[x]) == 1){//words[x].length == 1){
+            //console.log(`Run Test: ${words[x-1]} - ${words[x]} - ${words[x+1]}`)
+            if((words[x-1] && isAllCaps(words[x-1]))
+            || (words[x+1] && isAllCaps(words[x+1]))){
+                ;
             }
             else{
                 allCaps = false;
@@ -80,7 +94,7 @@ exports.choicename = "Ball Gag"
 
 //Test Gag Intensities
 let intensityTestMsg = "I AM LOUD.  I am quiet."
-let intensityTestMsg2 = "What A predicament."
+let intensityTestMsg2 = "Ha! I, in my brattiness, created  test-4, a test. . .  just to anger DOLL-0014 into domming me!!"
 
 console.log(`Original:     ${intensityTestMsg}\n`)
 console.log(`Intensity 1-2:   ${garbleText(intensityTestMsg, 1)}`)
