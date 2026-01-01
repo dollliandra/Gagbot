@@ -320,7 +320,7 @@ const garbleMessage = async (threadId, msg) => {
 
         // Handle Dollification
         let dollID;
-        if(getHeadwear(msg.author.id).find((headwear) => ["doll_visor", "doll_visor_trans"].includes(headwear))){
+        if(getHeadwear(msg.author.id).find((headwear) => ["doll_visor", "doll_visor_blind"].includes(headwear))){
             modifiedmessage = true;
             dollDigits      = DOLLOVERRIDES[msg.author.id] ? DOLLOVERRIDES[msg.author.id] : `${msg.author.id}`.slice(-4)
             // Include the tag - Otherwise, there is NO WAY to tell who it is.
