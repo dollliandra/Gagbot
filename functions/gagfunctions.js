@@ -7,7 +7,9 @@ const { stutterText, getArousedTexts } = require(`./../functions/vibefunctions.j
 const { getVibeEquivalent } = require('./vibefunctions.js');
 const { getHeadwearRestrictions, processHeadwearEmoji, getHeadwearName, getHeadwear, DOLLOVERRIDES, DOLLVISORS } = require('./headwearfunctions.js')
 
-const DOLLREGEX = /(((?<!\*)\*{1})(\*{2})?([^\*]|\*{2})+\*)|(((?<!\_)\_{1})(\_{2})?([^\_]|\_{2})+\_)|\n/g
+//const DOLLREGEX = /(((?<!\*)\*{1})(\*{2})?([^\*]|\*{2})+\*)|(((?<!\_)\_{1})(\_{2})?([^\_]|\_{2})+\_)|\n/g
+// Abomination of a regex for corset compatibility.
+const DOLLREGEX = /(((?<!\*)(?<!(\*hff|\*hnnf|\*ahff|\*hhh|\*nnh|\*hnn|\*hng|\*uah|\*uhf))\*{1})(?!(hff\*|hnnf\*|ahff\*|hhh\*|nnh\*|hnn\*|hng\*|uah\*|uhf\*))(\*{2})?([^\*]|\*{2})+\*)|(((?<!\_)\_{1})(\_{2})?([^\_]|\_{2})+\_)|\n/g
 
 
 // Grab all the command files from the commands directory
@@ -334,9 +336,20 @@ const garbleMessage = async (threadId, msg) => {
 
             let dollMessageParts = splitMessage(outtext, DOLLREGEX)     // Reuse splitMessage, but with a different regex.
 
+
+            // Strip all codeblocks from messages
+            for(let i = 0; i < dollMessageParts.length; i++){
+                if(dollMessageParts[i].garble){
+                    dollMessageParts[i].text = dollMessageParts[i].text.replaceAll(/```(js|javascript|ansi)?\s*/g,  "")
+                }
+            }
+            dollMessageParts = dollMessageParts.filter((part) => {return part.text != ""})
+
             // Put every "garble" messagePart in ANSI.
             for(let i = 0; i < dollMessageParts.length; i++){
                 if(dollMessageParts[i].garble){
+                    // Uncorset
+                    dollMessageParts[i].text = dollMessageParts[i].text.replaceAll(/ *-# */g,"")
                     dollMessageParts[i].text = `\`\`\`ansi\n[1;${dollIDColor}m${dollID}: [0m${dollMessageParts[i].text}\`\`\``
                 }
             }
