@@ -193,10 +193,10 @@ const texts_corset = {
                     discard: {
                         self: {
                             corset: [
-                                `USER_TAG tries to unlock USER_THEIR belt to adjust the corset but fumbles with the key so much with the key that they drop it somewhere so USER_THEY will remain just as out of breath as before!`
+                                `USER_TAG tries to unlock USER_THEIR belt to adjust the corset but fumbles with the key so much with the key that USER_THEY dropUSER_S it somewhere so USER_THEY will remain just as out of breath as before!`
                             ],
                             nocorset: [
-                                `USER_TAG tries to unlock USER_THEIR belt to put on a corset but fumbles with the key so much with the key that they drop it somewhere! Hopefully USER_THEY can find it soon!`
+                                `USER_TAG tries to unlock USER_THEIR belt to put on a corset but fumbles with the key so much with the key that USER_THEY dropUSER_S it somewhere! Hopefully USER_THEY can find it soon!`
                             ]
                         },
                         other: {
@@ -621,23 +621,23 @@ const texts_struggle = {
                 `USER_TAG runs USER_THEIR palms on USER_THEIR VAR_C4, but despite USER_THEIR best efforts, the belt remains unyielding on USER_THEIR hips.`,
                 `USER_TAG wiggles USER_THEIR thighs to make USER_THEIR VAR_C4 sit more comfortably. Steel is so *unforgiving.*`,
                 `USER_TAG gropes USER_THEMSELF with USER_THEIR hands, helplessly unable to touch...`,
-                `USER_TAG squirms in USER_THEIR VAR_C4, but no matter how much USER_THEY try, USER_THEY just can't feel anything...`,
-                `USER_TAG sighs as USER_THEY try to fumble with USER_THEIR VAR_C4. When was the last time they had freedom or relief?`,
+                `USER_TAG squirms in USER_THEIR VAR_C4, but no matter how much USER_THEY USER_TRY, USER_THEY just can't feel anything...`,
+                `USER_TAG sighs as USER_THEY USER_TRY to fumble with USER_THEIR VAR_C4. When was the last time USER_THEY had freedom or relief?`,
                 `USER_TAG mews in despair as USER_THEY can't get *any* feeling when touching down there! Poor USER_THEM!`,
                 `USER_TAG tried so hard to touch USER_THEMSELF, and didn't get so far. But in the end, it doesn't even matter.`,
-                `USER_TAG fusses with USER_THEIR belt, but USER_THEY have forgotten. Good USER_PRAISEOBJECT ***never*** cum.`,
+                `USER_TAG fusses with USER_THEIR belt, but USER_THEY forgot: Good USER_PRAISEOBJECT ***never*** cum.`,
             ],
             // In mittens, so definitely no fingers. 50% chance to use with mittens, 0% chance with free hands
             mitten: [
                 `USER_TAG tries to get USER_THEIR fingers under USER_THEIR VAR_C4, but... USER_THEIR VAR_C3 prevents USER_THEM from hooking on anything.`,
                 `USER_TAG's VAR_C3 really limit how much USER_THEY can get under USER_THEIR VAR_C4. Not like USER_THEY needed relief or anything.`,
                 `USER_TAG uses the smooth surface of USER_THEIR VAR_C3 to try to push on the waist band of USER_THEIR VAR_C4, but it doesn't help.`,
-                `USER_TAG paws at USER_THEIR VAR_C4, but sadly USER_THEY can't really do anything to push it off. Not that they'd want to.`,
+                `USER_TAG paws at USER_THEIR VAR_C4, but sadly USER_THEY can't really do anything to push it off. Not that USER_THEY'd want to.`,
             ],
             // Able to use fingers. 50% chance to use with free hands, 0% chance to use with mittens
             nomitten: [
                 `USER_TAG caresses the smooth metal of USER_THEIR VAR_C4, but the lock holds it snugly to USER_THEIR hips!`,
-                `USER_TAG tries to get a couple of fingers under USER_THEIR VAR_C4, but it's quite challenging to. USER_THEY_CAP should use the key!`,
+                `USER_TAG tries to get a couple of fingers under USER_THEIR VAR_C4, but it's quite challenging to do so. USER_THEY_CAP should use the key!`,
                 `USER_TAG squeezes USER_THEIR thumb under the waistband of USER_THEIR VAR_C4, but can accomplish little more than shift it a bit.`,
                 `USER_TAG dances USER_THEIR fingernails on the protective shield of USER_THEIR VAR_C4. Oh how nice it would be to touch...`
             ]
@@ -929,7 +929,7 @@ const texts_uncorset = {
                                 `USER_TAG tries to unlock USER_THEIR belt to remove USER_THEIR corset, but fumbles with the key so much with the key that USER_THEY dropUSER_S it somewhere! USER_THEY_CAP will have to remain corseted!`
                             ],
                             nodiscard: [
-                                `USER_TAG shakily tries to unlock USER_THEIR belt, but the key keeps slipping and not going into the mechanism. USER_THEY will have to leave USER_THEIR corset alone until they calm down!`
+                                `USER_TAG shakily tries to unlock USER_THEIR belt, but the key keeps slipping and not going into the mechanism. USER_THEY will have to leave USER_THEIR corset alone until USER_THEY calm down!`
                             ]
                         },
                         nofumble: [

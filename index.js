@@ -195,4 +195,29 @@ client.on('interactionCreate', async (interaction) => {
     }
 })
 
+// I refuse to use a proper database with backups. 
+// This is a solution to backup the terrible database. 
+setInterval(() => {
+    try {
+        let filepath = process.GagbotSavedFileDirectory;
+        let dest = path.resolve(filepath, "backups");
+        let files = fs.readdirSync(filepath).filter(file => file.endsWith('.txt'));
+
+        let zip = new admZip();
+
+        let timestring = getTimestringForZip();
+
+        files.forEach(f => {
+            zip.addLocalFile(path.resolve(filepath, f));
+        })
+
+        zip.writeZip(path.resolve(dest, `backup-${timestring}.zip`));
+
+        console.log(`Completed zip .\\backup\\backup-${timestring}.zip`)
+    }
+    catch (err) {
+        console.log(err)
+    }
+}, 3600000) // Backups every one hour. 
+
 client.login(process.env.DISCORDBOTTOKEN)

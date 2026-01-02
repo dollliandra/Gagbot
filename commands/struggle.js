@@ -11,6 +11,7 @@ const { getChastity, getChastityName } = require('../functions/vibefunctions.js'
 const { getCollar, getCollarName } = require('../functions/collarfunctions.js');
 
 module.exports = {
+    cooldown: 10,
 	data: new SlashCommandBuilder()
 		.setName('struggle')
 		.setDescription('Struggle with one of your restraints...')

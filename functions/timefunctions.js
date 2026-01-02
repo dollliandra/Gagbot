@@ -40,5 +40,27 @@ const calculateTimeout = (text) => {
     }
 }
 
+// I refuse to use proper databases. This is to generate backups. 
+// This is vibecoded, admittedly, and then adjusted, but the result looks solid. 
+const getTimestringForZip = () => {
+    const d = new Date();
+
+    // Date Components
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    const yyyy = d.getFullYear();
+
+    // Time Components
+    const hh = String(d.getHours()).padStart(2, '0'); // 24-hour format
+    const min = String(d.getMinutes()).padStart(2, '0');
+
+    // Combine
+    const formatted = `${mm}-${dd}-${yyyy}-${hh}-${min}`;
+    //console.log(formatted); // Example: "01/01/2026-21:05"
+
+    return formatted;
+}
+
 exports.parseTime = parseTime;
 exports.calculateTimeout = calculateTimeout;
+exports.getTimestringForZip = getTimestringForZip;

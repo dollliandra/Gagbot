@@ -141,7 +141,7 @@ const convertPronounsText = (text, data) => {
     outtext = outtext.replaceAll("USER_TRY", (getPronouns(interactionuser.id, "subject") == "they") ? "try" : "tries");
 
     // Other Replacements
-    outtext = outtext.replaceAll("USER_PRAISEOBJECT", () => () => {
+    outtext = outtext.replaceAll("USER_PRAISEOBJECT", () => {
         if ((getPronouns(interactionuser.id, "subject") == "she")) { return "girls" }
         if ((getPronouns(interactionuser.id, "subject") == "he")) { return "boys" }
         return "toys"
@@ -196,7 +196,7 @@ const convertPronounsText = (text, data) => {
     outtext = outtext.replaceAll("TARGET_TRY", (getPronouns(targetuser.id, "subject") == "they") ? "try" : "tries");
 
     // Other Replacements
-    outtext = outtext.replaceAll("TARGET_PRAISEOBJECT", () => () => {
+    outtext = outtext.replaceAll("TARGET_PRAISEOBJECT", () => {
         if ((getPronouns(targetuser.id, "subject") == "she")) { return "girls" }
         if ((getPronouns(targetuser.id, "subject") == "he")) { return "boys" }
         return "toys"
