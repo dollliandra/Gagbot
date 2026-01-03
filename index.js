@@ -14,6 +14,7 @@ const { assignCorset } = require('./functions/corsetfunctions.js');
 const { assignMemeImages } = require('./functions/interactivefunctions.js');
 const { updateArousalValues } = require('./functions/vibefunctions.js');
 const { backupsAreAnnoying, saveFiles } = require('./functions/timefunctions.js');
+const { loadEmoji } = require("./functions/messagefunctions.js");
 
 // Prevent node from killing us immediately when we do the next line.
 process.stdin.resume();
@@ -141,6 +142,7 @@ client.on("clientReady", async () => {
         console.log(`Modals: [${Array.from(modalHandlers.keys()).join(", ")}]`);
         console.log(`Components: [${Array.from(componentHandlers.keys()).join(", ")}]`);
         console.log(`Autocompletes: [${Array.from(autocompletehandlers.keys()).join(", ")}]`);
+        loadEmoji(client);
     }
     catch (err) {
         console.log(err)

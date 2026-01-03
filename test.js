@@ -1,17 +1,33 @@
+const discord = require('discord.js')
 const fs = require('fs')
 const path = require('path');
 const admZip = require('adm-zip');
 const { getTimestringForZip } = require("./functions/timefunctions");
 const env = require('dotenv')
+const { loadEmoji } = require("./functions/messagefunctions.js");
 
 env.config();
 
-process.stdin.resume();
+const client = new discord.Client({
+    intents: [
+        discord.GatewayIntentBits.Guilds,
+        discord.GatewayIntentBits.GuildMessages,
+        discord.GatewayIntentBits.MessageContent,
+        discord.GatewayIntentBits.GuildMembers
+    ]
+})
 
-// I've never considered overriding this before lol
-process.on('SIGINT', () => {
-  console.log('Received SIGINT (Ctrl+C). Performing graceful shutdown...');
-  console.log(`DO ALL THE THINGS`)
-  console.log(process.pid)
-  process.exit(0); 
-});
+client.on("clientReady", async () => {
+    // This is run once we’re logged in!
+    console.log(`Logged in as ${client.user.tag}!`)
+    try {
+        await client.application.fetch();
+        loadEmoji(client)
+    }
+    catch (err) {
+        console.log(err)
+    }
+})
+
+
+client.login(process.env.DISCORDBOTTOKEN)
