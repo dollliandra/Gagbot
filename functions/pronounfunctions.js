@@ -133,7 +133,7 @@ const convertPronounsText = (text, data) => {
     // And wasn't/weren't
     outtext = outtext.replaceAll("USER_WERENT", (getPronouns(interactionuser.id, "subject") == "they") ? "weren't" : "wasn't");
     // And "doesn't"
-    outtext = outtext.replaceAll("USER_DOESNT", (getPronouns(interactionuser.id, "subject") == "they") ? "doesn't" : "don't");
+    outtext = outtext.replaceAll("USER_DOESNT", (getPronouns(interactionuser.id, "subject") == "they") ? "don't" : "doesn't");
     // And "es"
     outtext = outtext.replaceAll("USER_ES", (getPronouns(interactionuser.id, "subject") == "they") ? "" : "es");
     // And "s"
@@ -188,7 +188,7 @@ const convertPronounsText = (text, data) => {
     // And wasn't/weren't
     outtext = outtext.replaceAll("TARGET_WERENT", (getPronouns(targetuser.id, "subject") == "they") ? "weren't" : "wasn't");
     // And "doesn't"
-    outtext = outtext.replaceAll("TARGET_DOESNT", (getPronouns(targetuser.id, "subject") == "they") ? "doesn't" : "don't");
+    outtext = outtext.replaceAll("TARGET_DOESNT", (getPronouns(targetuser.id, "subject") == "they") ? "don't" : "doesn't");
     // And "es"
     outtext = outtext.replaceAll("TARGET_ES", (getPronouns(targetuser.id, "subject") == "they") ? "" : "es");
     // And "s"

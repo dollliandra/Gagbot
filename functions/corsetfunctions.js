@@ -96,7 +96,7 @@ function corsetLimitWords(user, text) {
       }
 
       // SILENCE BOTTOM
-      if (!silence && corset.tightness >= 5) word = word.replaceAll("!", "~");
+      if (!silence && corset.tightness >= 5) word = word.replaceAll("!", "\\~");
 
       if (!silence) newwordsinmessage.push(word);
     }

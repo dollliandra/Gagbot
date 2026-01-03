@@ -591,7 +591,7 @@ const texts_struggle = {
             nomouth: [
                 `USER_TAG tries to brush the back of USER_THEIR VAR_C3 with USER_THEIR cheek.`,
                 `USER_TAG uses USER_THEIR chin to pinch and try to pull off the VAR_C3. The straps hold firm!`,
-                `USER_TAG claps USER_THEIR hands together. USER_THEY_CAP like these VAR_C3. USER_THEY_CAP USER_DOESNT need hands!`
+                `USER_TAG claps USER_THEIR hands together. USER_THEY_CAP likeUSER_S these VAR_C3. USER_THEY_CAP USER_DOESNT need hands!`
             ],
             // Using only wrists, but brushing up with gag. 50% chance with gag
             gag: [
@@ -751,6 +751,21 @@ const texts_struggle = {
         `USER_TAG tries to imagine how best to adjust USER_THEIR speech when gagged. Perhaps with practice, USER_THEY can figure it out!`,
         `All the keys clanging and bondage restraints strewn about makes USER_TAG swim in happy thoughts!`,
         `USER_TAG twirls USER_THEIR hair absentmindedly. Someone should tie USER_THEM up with more bondage, tehe!~`,
+        `USER_TAG clears USER_THEIR throat and then begins to speak: The FitnessGram Pacer Test is a multistage aerobic capacity test that progressively gets more difficult as it continues. The 20 meter pacer test will begin in 30 seconds. Line up at the start. The running speed starts slowly but gets faster each minute after you hear this signal bodeboop. A sing lap should be completed every time you hear this sound. ding Remember to run in a straight line and run as long as possible. The second time you fail to complete a lap before the sound, your test is over. The test will begin on the word start. On your mark. Get ready!… Start.`,
+        `USER_TAG's mind is fantasizing about the cute characters in that last anime USER_THEY watched. Everyone should ask USER_THEM about it!`,
+        `USER_TAG's voice echoes through the halls as USER_THEY monologueUSER_S: ***Tell me, for whom do you fight...***`,
+        `USER_TAG wants ice cream. Everyone should have ice cream. USER_THEY_CAP wantUSER_S to know what everyone's favorite flavor is!`,
+        `USER_TAG is getting cold feet. Someone should tie USER_THEM up and tickle USER_THEIR feet so they warm up!`,
+        `USER_TAG wants hot cocoa and to sit cozily by a fire on a stormy day, just pleasantly reading and enjoying the warm. Under a blankey. So nice...`,
+        `USER_TAG fans USER_THEMSELF as USER_THEY lookUSER_S at the strewn restraints. Gagbot has been busy. Hopefully USER_THEY USER_ISARE the next target!`,
+        `USER_TAG starts mumbling, counting sheep to USER_THEMSELF. USER_THEY might be a little sleepy...`,
+        `USER_TAG starts scrolling on YourSpace, and comes across a post titled, 'rawr XD' with a girl with too much eyeshadow and a terrible webcam in the dark.`,
+        `USER_TAG wants to take a selfie. In bondage, of course. Who wouldn't want to take beautiful pictures wearing a ball gag?`,
+        `USER_TAG's breathing accelerates a little as USER_THEY fantasize about being in chains, kneeling at the feet of someone here... Who will give USER_THEM that fantasy?`,
+        `USER_TAG might have had some water recently, but it's good to remember to get more. Can never have too much, afterall.`,
+        `All this talk about servitude and the moans from the dungeon's denizens makes it impossible for USER_TAG to focus...`,
+        `USER_TAG wants to lay in someone's lap. Or maybe have someone lay in USER_THEIR lap. Maybe both.`,
+        `USER_TAG wants to pet a cute kitty. Or a cute doggo. Maybe lots of cute kitties and doggos!`,
     ]
 }
 
